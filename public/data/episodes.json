@@ -1,0 +1,52 @@
+[
+  {
+    "id": "A-1",
+    "courseId": "A",
+    "title": "背景と文化",
+    "description": "作品の背景を学びます",
+    "duration": "8:45",
+    "youtubeId": "",
+    "transcript": "",
+    "order": 0
+  },
+  {
+    "id": "A-2",
+    "courseId": "A",
+    "title": "主要人物",
+    "description": "主要な登場人物について",
+    "duration": "10:20",
+    "youtubeId": "",
+    "transcript": "",
+    "order": 1
+  },
+  {
+    "id": "B-1",
+    "courseId": "B",
+    "title": "歴史的背景",
+    "description": "作品の時代背景を学ぶ",
+    "duration": "12:00",
+    "youtubeId": "",
+    "transcript": "",
+    "order": 0
+  },
+  {
+    "id": "B-2",
+    "courseId": "B",
+    "title": "文化的影響",
+    "description": "作品の社会的影響",
+    "duration": "9:30",
+    "youtubeId": "",
+    "transcript": "",
+    "order": 1
+  },
+  {
+    "id": "S-0",
+    "courseId": "S",
+    "title": "はじめに",
+    "description": "オンライン講義のガイダンス",
+    "duration": "5:30",
+    "youtubeId": "",
+    "transcript": "",
+    "order": 0
+  }
+]

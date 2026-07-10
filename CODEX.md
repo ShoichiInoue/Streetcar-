@@ -26,3 +26,31 @@
 2. ローカル確認手順を示す。
 3. 既知の未実装事項を示す。
 4. 勝手にGit commitやpushをしない。
+
+## コンテンツ管理（自動変換の仕組み）
+
+コース、講義、スタッフ情報は`raw-content/`フォルダの CSV ファイルで一元管理し、自動で JSON に変換します。
+
+### 入力方法
+
+1. `raw-content/courses.csv` にコース情報を入力
+2. `raw-content/episodes.csv` に講義情報を入力
+
+### ビルド実行
+
+```bash
+cd /Users/inoueshouichi/Streetcar
+python3 build-content.py
+```
+
+### 出力
+
+```
+public/data/
+├── courses.json      # ✨ 自動生成
+└── episodes.json     # ✨ 自動生成
+```
+
+### 詳細
+
+詳しい入力ガイドは`raw-content/README.md`を参照してください。

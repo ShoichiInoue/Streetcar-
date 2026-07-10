@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>architecture.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/inoueshouichi/Streetcar/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/inoueshouichi/Streetcar/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="codex%E8%A8%AD%E8%A8%88%E4%BB%95%E6%A7%98%E6%9B%B8">CODEX設計仕様書</h1>
+<h2 id="%E6%AC%B2%E6%9C%9B%E3%81%A8%E3%81%84%E3%81%86%E5%90%8D%E3%81%AE%E9%9B%BB%E8%BB%8A%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E8%AC%9B%E7%BE%A9%E3%82%B5%E3%82%A4%E3%83%88">『欲望という名の電車』オンライン講義サイト</h2>
+<p><strong>目的</strong><br>
+第47回定期演奏会で扱う『欲望という名の電車』について、演奏に参加する人を主な対象としつつ、一般の来場者も自然に楽しめる映像講義サイトを構築する。<br>
+コース名・回数・各回の内容は今後大きく変更される可能性があるため、<strong>HTMLへ内容を直書きせず、データを差し替えるだけで更新できる構造</strong>を最優先する。</p>
+<hr>
+<h1 id="1-%E5%AE%9F%E8%A3%85%E6%96%B9%E9%87%9D">1. 実装方針</h1>
+<h2 id="11-%E4%BD%BF%E7%94%A8%E6%8A%80%E8%A1%93">1.1 使用技術</h2>
+<p>初期版は次のみに限定する。</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>Vanilla JavaScript</li>
+<li>JSON</li>
+<li>YouTube埋め込み</li>
+<li>Cloudflare Pages</li>
+<li>GitHub</li>
+</ul>
+<p>React、Astro、Vue、データベース、サーバー処理は初期版では使用しない。</p>
+<h2 id="12-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%89%87">1.2 基本原則</h2>
+<ol>
+<li>表示構造とコンテンツデータを分離する。</li>
+<li>コースや講義の追加・削除・並べ替えをJSON編集だけで行えるようにする。</li>
+<li>各ページを34枚手作業で複製しない。</li>
+<li>共通部品はJavaScriptで生成する。</li>
+<li>スマートフォンを最優先し、PCでも上品に見えるレスポンシブ設計とする。</li>
+<li>動画ファイルはサイトへ置かず、YouTube埋め込みを使う。</li>
+<li>Codex向けの長期指示書・設計資料は<code>public</code>の外へ置く。</li>
+<li><code>public</code>以下だけがCloudflare Pagesで公開される前提とする。</li>
+</ol>
+<hr>
+<h1 id="2-%E6%8E%A8%E5%A5%A8%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90">2. 推奨ディレクトリ構成</h1>
+<pre class="hljs"><code><div>Streetcar/
+├── CODEX.md
+├── README.md
+├── docs/
+│   ├── architecture.md
+│   ├── content-policy.md
+│   └── design-notes.md
+│
+├── source/
+│   ├── scripts/
+│   ├── references/
+│   └── notes/
+│
+└── public/
+    ├── index.html
+    ├── welcome.html
+    ├── course.html
+    ├── episode.html
+    ├── bibliography.html
+    ├── about.html
+    │
+    ├── css/
+    │   ├── reset.css
+    │   ├── tokens.css
+    │   ├── layout.css
+    │   ├── components.css
+    │   └── pages.css
+    │
+    ├── js/
+    │   ├── app.js
+    │   ├── intro-guard.js
+    │   ├── data-loader.js
+    │   ├── render-home.js
+    │   ├── render-course.js
+    │   ├── render-episode.js
+    │   ├── navigation.js
+    │   └── analytics.js
+    │
+    ├── data/
+    │   ├── site.json
+    │   ├── courses.json
+    │   ├── episodes.json
+    │   ├── references.json
+    │   └── people.json
+    │
+    ├── images/
+    │   ├── site/
+    │   ├── courses/
+    │   ├── episodes/
+    │   └── references/
+    │
+    ├── icons/
+    └── favicon.ico
+</div></code></pre>
+<h2 id="21-%E9%9D%9E%E5%85%AC%E9%96%8B%E9%A0%98%E5%9F%9F">2.1 非公開領域</h2>
+<p>以下はCloudflareへ配信しない。</p>
+<ul>
+<li><code>CODEX.md</code></li>
+<li><code>docs/</code></li>
+<li><code>source/</code></li>
+<li>動画台本</li>
+<li>未公開の研究メモ</li>
+<li>著作権確認前の画像</li>
+<li>個人情報</li>
+<li>APIキーや認証情報</li>
+</ul>
+<hr>
+<h1 id="3-cloudflare-pages%E8%A8%AD%E5%AE%9A">3. Cloudflare Pages設定</h1>
+<pre class="hljs"><code><div>Framework preset:
+None
+
+Build command:
+mkdir -p dist &amp;&amp; cp -R public/. dist/
+
+Build output directory:
+dist
+</div></code></pre>
+<p><code>public</code>以下のみを公開する。</p>
+<hr>
+<h1 id="4-codex%E3%81%AE%E4%BD%9C%E6%A5%AD%E8%A6%8F%E5%89%87">4. Codexの作業規則</h1>
+<p>Codexは作業開始時に、原則として次の順に読む。</p>
+<ol>
+<li><code>CODEX.md</code></li>
+<li>必要な場合のみ<code>docs/architecture.md</code></li>
+<li>編集対象のファイル</li>
+<li>関連するJSON</li>
+</ol>
+<p>無関係なファイルを大量に読まない。<br>
+一度に広範囲を書き換えず、小さな単位で実装・確認する。</p>
+<h2 id="41-%E7%A6%81%E6%AD%A2%E4%BA%8B%E9%A0%85">4.1 禁止事項</h2>
+<ul>
+<li>講義タイトルや本文をHTMLへ直接大量に記述しない。</li>
+<li>コース数をA〜Fの6個に固定しない。</li>
+<li>各コースの回数を固定しない。</li>
+<li>前後関係をファイル名だけから決め打ちしない。</li>
+<li>本番用URLをJavaScriptへハードコードしない。</li>
+<li>外部ライブラリを無断で追加しない。</li>
+<li>デザイン変更のためにコンテンツJSONを壊さない。</li>
+<li>未完成ページでエラー画面を出さない。</li>
+<li>YouTube動画未登録時に空のiframeを表示しない。</li>
+</ul>
+<hr>
+<h1 id="5-%E5%88%9D%E5%9B%9E%E8%A8%AA%E5%95%8F%E6%99%82%E3%81%AEs-0%E5%B0%8E%E7%B7%9A">5. 初回訪問時のS-0導線</h1>
+<h2 id="51-%E8%A6%81%E4%BB%B6">5.1 要件</h2>
+<p>初めてサイトを開いた利用者だけ、自動的に<code>welcome.html</code>へ案内する。</p>
+<p>保存キー：</p>
+<pre class="hljs"><code><div>streetcar_intro_seen_v1
+</div></code></pre>
+<h2 id="52-%E5%8B%95%E4%BD%9C">5.2 動作</h2>
+<ol>
+<li>利用者が初めて任意ページへアクセスする。</li>
+<li><code>localStorage</code>に保存キーがなければ<code>welcome.html</code>へ移動する。</li>
+<li>元のアクセス先を<code>next</code>パラメータとして保持する。</li>
+<li>S-0動画・説明の最後に「コースを選ぶ」ボタンを表示する。</li>
+<li>ボタンを押した時点で保存キーを設定する。</li>
+<li><code>next</code>があれば元ページへ戻し、なければトップページへ進む。</li>
+<li>二回目以降は自動転送しない。</li>
+<li>ヘッダーまたはAboutページに「はじめての方へ」を常設し、S-0をいつでも再視聴可能にする。</li>
+</ol>
+<p>例：</p>
+<pre class="hljs"><code><div>初回アクセス:
+episode.html?id=A-1
+
+転送先:
+welcome.html?next=episode.html%3Fid%3DA-1
+</div></code></pre>
+<h2 id="53-%E4%BE%8B%E5%A4%96">5.3 例外</h2>
+<p>次の場合は初回判定を無視する。</p>
+<pre class="hljs"><code><div>?skipIntro=1
+</div></code></pre>
+<p>利用目的：</p>
+<ul>
+<li>制作確認</li>
+<li>デバッグ</li>
+<li>スクリーンショット撮影</li>
+<li>自動テスト</li>
+</ul>
+<h2 id="54-%E5%AE%9F%E8%A3%85%E4%B8%8A%E3%81%AE%E6%B3%A8%E6%84%8F">5.4 実装上の注意</h2>
+<ul>
+<li>Cookieではなく<code>localStorage</code>を使う。</li>
+<li><code>welcome.html</code>自身では再転送しない。</li>
+<li>ストレージ利用不可の場合もサイト閲覧を妨げない。</li>
+<li>初回判定は個人追跡に使わない。</li>
+<li>保存キーのバージョンを変更すれば、将来新版S-0を再表示できる。</li>
+</ul>
+<hr>
+<h1 id="6-%E3%83%9A%E3%83%BC%E3%82%B8%E6%A7%8B%E6%88%90">6. ページ構成</h1>
+<h2 id="61-welcomehtmls-0">6.1 <code>welcome.html</code>：S-0</h2>
+<p>表示内容：</p>
+<ul>
+<li>サイトタイトル</li>
+<li>S-0タイトル</li>
+<li>5分程度の案内動画</li>
+<li>短い説明文</li>
+<li>「コースを選ぶ」ボタン</li>
+<li>「説明を飛ばしてコース一覧へ」補助リンク</li>
+</ul>
+<p>動画未完成時：</p>
+<ul>
+<li>ポスター画像</li>
+<li>「動画は準備中です」</li>
+<li>コース一覧へ進めるボタン</li>
+</ul>
+<h2 id="62-indexhtml%E3%83%88%E3%83%83%E3%83%97%EF%BC%8F%E3%82%B3%E3%83%BC%E3%82%B9%E4%B8%80%E8%A6%A7">6.2 <code>index.html</code>：トップ／コース一覧</h2>
+<p>表示内容：</p>
+<ul>
+<li>ヒーローエリア</li>
+<li>サイトの短い説明</li>
+<li>コースカード一覧</li>
+<li>公開済み講義</li>
+<li>おすすめの入口</li>
+<li>最近追加された講義</li>
+<li>「どこから見ればよいかわからない方へ」</li>
+<li>S-0再視聴リンク</li>
+</ul>
+<p>コースカードは<code>courses.json</code>から自動生成する。</p>
+<p>各カードの内容：</p>
+<ul>
+<li>コース記号</li>
+<li>コース名</li>
+<li>副題</li>
+<li>短い説明</li>
+<li>公開済み回数</li>
+<li>総予定回数</li>
+<li>キービジュアル</li>
+<li>アクセントカラー</li>
+<li>詳細ページへのリンク</li>
+</ul>
+<h2 id="63-coursehtmlida">6.3 <code>course.html?id=A</code></h2>
+<p>表示内容：</p>
+<ul>
+<li>コース名</li>
+<li>副題</li>
+<li>コース概要</li>
+<li>キービジュアル</li>
+<li>回一覧</li>
+<li>各回の公開状態</li>
+<li>推奨視聴順</li>
+<li>関連コース</li>
+</ul>
+<p>回一覧は<code>episodes.json</code>から該当コースを抽出し、<code>order</code>順で表示する。</p>
+<h2 id="64-episodehtmlida-1">6.4 <code>episode.html?id=A-1</code></h2>
+<p>表示順：</p>
+<ol>
+<li>パンくず</li>
+<li>コース・回番号</li>
+<li>タイトル</li>
+<li>副題</li>
+<li>YouTubeプレイヤー</li>
+<li>前回／コース一覧／次回</li>
+<li>概要</li>
+<li>チャプター</li>
+<li>関連コンテンツ</li>
+<li>参考文献</li>
+<li>関連人物</li>
+<li>画像・資料</li>
+<li>注記</li>
+<li>下部の前後ナビゲーション</li>
+</ol>
+<p>動画未公開時：</p>
+<ul>
+<li>「準備中」表示</li>
+<li>概要や参考文献は閲覧可能</li>
+<li>次回リンクなどは通常表示</li>
+<li>空iframeは表示しない</li>
+</ul>
+<h2 id="65-bibliographyhtml">6.5 <code>bibliography.html</code></h2>
+<ul>
+<li>全参考文献</li>
+<li>著者・発行年・分類による絞り込み</li>
+<li>使用されている講義への逆リンク</li>
+<li>外部リンクがある場合のみ表示</li>
+</ul>
+<hr>
+<h1 id="7-%E3%83%87%E3%83%BC%E3%82%BF%E8%A8%AD%E8%A8%88">7. データ設計</h1>
+<h2 id="71-sitejson">7.1 <code>site.json</code></h2>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"siteTitle"</span>: <span class="hljs-string">"『欲望という名の電車』オンライン講義"</span>,
+  <span class="hljs-attr">"shortTitle"</span>: <span class="hljs-string">"Streetcar Lecture"</span>,
+  <span class="hljs-attr">"concertTitle"</span>: <span class="hljs-string">"第47回定期演奏会"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"作品をより深く楽しむための映像講義サイト"</span>,
+  <span class="hljs-attr">"youtubeChannelUrl"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"introStorageKey"</span>: <span class="hljs-string">"streetcar_intro_seen_v1"</span>,
+  <span class="hljs-attr">"defaultOgpImage"</span>: <span class="hljs-string">"/images/site/og-default.jpg"</span>
+}
+</div></code></pre>
+<h2 id="72-coursesjson">7.2 <code>courses.json</code></h2>
+<p>コース数・名称・順番は自由に変更可能とする。</p>
+<pre class="hljs"><code><div>[
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A"</span>,
+    <span class="hljs-attr">"order"</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"なぜスタンリーはブランチをレイプしたのか"</span>,
+    <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"二人の対立はなぜ身体的暴力へ到達したのか"</span>,
+    <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"作品の中心問題を、登場人物の尊厳と対立から読み解く。"</span>,
+    <span class="hljs-attr">"image"</span>: <span class="hljs-string">"/images/courses/course-a.jpg"</span>,
+    <span class="hljs-attr">"accent"</span>: <span class="hljs-string">"#8f2d35"</span>,
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+    <span class="hljs-attr">"featured"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"recommendedFor"</span>: [<span class="hljs-string">"物語を理解したい"</span>, <span class="hljs-string">"人物関係を知りたい"</span>]
+  }
+]
+</div></code></pre>
+<h3 id="status"><code>status</code></h3>
+<ul>
+<li><code>active</code>：通常表示</li>
+<li><code>coming-soon</code>：予告表示</li>
+<li><code>hidden</code>：非表示</li>
+<li><code>archived</code>：資料として残す</li>
+</ul>
+<h2 id="73-episodesjson">7.3 <code>episodes.json</code></h2>
+<pre class="hljs"><code><div>[
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"S-0"</span>,
+    <span class="hljs-attr">"courseId"</span>: <span class="hljs-string">"S"</span>,
+    <span class="hljs-attr">"order"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"ようこそ"</span>,
+    <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"このサイトの楽しみ方"</span>,
+    <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"各コースの見方と、このサイトの目的を紹介する。"</span>,
+    <span class="hljs-attr">"videoId"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"videoStatus"</span>: <span class="hljs-string">"planned"</span>,
+    <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"05:00"</span>,
+    <span class="hljs-attr">"thumbnail"</span>: <span class="hljs-string">"/images/episodes/s-0.jpg"</span>,
+    <span class="hljs-attr">"chapters"</span>: [],
+    <span class="hljs-attr">"related"</span>: [],
+    <span class="hljs-attr">"references"</span>: [],
+    <span class="hljs-attr">"people"</span>: [],
+    <span class="hljs-attr">"gallery"</span>: [],
+    <span class="hljs-attr">"tags"</span>: [<span class="hljs-string">"案内"</span>],
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"published"</span>,
+    <span class="hljs-attr">"publishedAt"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">""</span>
+  },
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A-1"</span>,
+    <span class="hljs-attr">"courseId"</span>: <span class="hljs-string">"A"</span>,
+    <span class="hljs-attr">"order"</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"ブランチは何を守ろうとしたのか"</span>,
+    <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"幻想の背後にあるもの"</span>,
+    <span class="hljs-attr">"summary"</span>: <span class="hljs-string">"ブランチの幻想を、尊厳と自己像を守る行為として読む。"</span>,
+    <span class="hljs-attr">"videoId"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"videoStatus"</span>: <span class="hljs-string">"planned"</span>,
+    <span class="hljs-attr">"duration"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"thumbnail"</span>: <span class="hljs-string">"/images/episodes/a-1.jpg"</span>,
+    <span class="hljs-attr">"chapters"</span>: [
+      {
+        <span class="hljs-attr">"time"</span>: <span class="hljs-string">"00:00"</span>,
+        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"導入"</span>
+      }
+    ],
+    <span class="hljs-attr">"related"</span>: [<span class="hljs-string">"B-5"</span>, <span class="hljs-string">"C-2"</span>, <span class="hljs-string">"C-5"</span>, <span class="hljs-string">"E-4"</span>],
+    <span class="hljs-attr">"references"</span>: [<span class="hljs-string">"williams-streetcar"</span>],
+    <span class="hljs-attr">"people"</span>: [<span class="hljs-string">"tennessee-williams"</span>],
+    <span class="hljs-attr">"gallery"</span>: [],
+    <span class="hljs-attr">"tags"</span>: [<span class="hljs-string">"ブランチ"</span>, <span class="hljs-string">"幻想"</span>, <span class="hljs-string">"尊厳"</span>],
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"coming-soon"</span>,
+    <span class="hljs-attr">"publishedAt"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">""</span>
+  }
+]
+</div></code></pre>
+<h3 id="videostatus"><code>videoStatus</code></h3>
+<ul>
+<li><code>planned</code></li>
+<li><code>recording</code></li>
+<li><code>editing</code></li>
+<li><code>published</code></li>
+</ul>
+<h3 id="status"><code>status</code></h3>
+<ul>
+<li><code>draft</code></li>
+<li><code>coming-soon</code></li>
+<li><code>published</code></li>
+<li><code>hidden</code></li>
+<li><code>archived</code></li>
+</ul>
+<h2 id="74-referencesjson">7.4 <code>references.json</code></h2>
+<pre class="hljs"><code><div>[
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"williams-streetcar"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"book"</span>,
+    <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Tennessee Williams"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A Streetcar Named Desire"</span>,
+    <span class="hljs-attr">"year"</span>: <span class="hljs-number">1947</span>,
+    <span class="hljs-attr">"publisher"</span>: <span class="hljs-string">"New Directions"</span>,
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"note"</span>: <span class="hljs-string">"原作戯曲"</span>,
+    <span class="hljs-attr">"language"</span>: <span class="hljs-string">"en"</span>
+  }
+]
+</div></code></pre>
+<h2 id="75-peoplejson">7.5 <code>people.json</code></h2>
+<pre class="hljs"><code><div>[
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"tennessee-williams"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"テネシー・ウィリアムズ"</span>,
+    <span class="hljs-attr">"role"</span>: <span class="hljs-string">"劇作家"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"『欲望という名の電車』の作者。"</span>,
+    <span class="hljs-attr">"image"</span>: <span class="hljs-string">"/images/references/tennessee-williams.jpg"</span>,
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">""</span>
+  }
+]
+</div></code></pre>
+<hr>
+<h1 id="8-%E5%89%8D%E5%9B%9E%E3%83%BB%E6%AC%A1%E5%9B%9E%E3%81%AE%E6%B1%BA%E5%AE%9A%E6%96%B9%E6%B3%95">8. 前回・次回の決定方法</h1>
+<p><code>episodes.json</code>から次の条件で自動計算する。</p>
+<ol>
+<li>同じ<code>courseId</code></li>
+<li><code>status</code>が<code>hidden</code>ではない</li>
+<li><code>order</code>の昇順</li>
+<li>現在の回の直前・直後</li>
+</ol>
+<p>タイトルや回数が変わっても、<code>order</code>を修正するだけでよい。</p>
+<p>コースをまたぐ「次におすすめ」は、前後リンクとは分離し、<code>related</code>で管理する。</p>
+<hr>
+<h1 id="9-%E9%96%A2%E9%80%A3%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84">9. 関連コンテンツ</h1>
+<p><code>related</code>には講義IDだけを保存する。</p>
+<pre class="hljs"><code><div><span class="hljs-string">"related"</span>: [<span class="hljs-string">"B-5"</span>, <span class="hljs-string">"C-2"</span>, <span class="hljs-string">"C-5"</span>, <span class="hljs-string">"E-4"</span>]
+</div></code></pre>
+<p>表示時に<code>episodes.json</code>から以下を取得する。</p>
+<ul>
+<li>コース記号</li>
+<li>タイトル</li>
+<li>副題</li>
+<li>サムネイル</li>
+<li>公開状態</li>
+</ul>
+<p>未公開回の場合：</p>
+<ul>
+<li>タイトルを表示</li>
+<li>「近日公開」ラベルを付ける</li>
+<li>クリック可否は設定で切り替え可能</li>
+</ul>
+<hr>
+<h1 id="10-%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E6%96%B9%E9%87%9D">10. デザイン方針</h1>
+<h2 id="101-%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">10.1 コンセプト</h2>
+<p><strong>劇場の暗がりと、紙提灯の柔らかな光。</strong></p>
+<p>高級感は持たせるが、過剰な装飾や映画館風の俗っぽさは避ける。<br>
+大学の公開講義、演劇プログラム、現代的な映像配信サービスの中間を目指す。</p>
+<h2 id="102-%E3%82%AB%E3%83%A9%E3%83%BC%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3">10.2 カラートークン</h2>
+<p><code>tokens.css</code>に集約する。</p>
+<pre class="hljs"><code><div><span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attribute">--color-bg</span>: <span class="hljs-number">#11100f</span>;
+  <span class="hljs-attribute">--color-surface</span>: <span class="hljs-number">#191715</span>;
+  <span class="hljs-attribute">--color-surface-soft</span>: <span class="hljs-number">#24211e</span>;
+  <span class="hljs-attribute">--color-text</span>: <span class="hljs-number">#f2eee8</span>;
+  <span class="hljs-attribute">--color-text-muted</span>: <span class="hljs-number">#b9b1a8</span>;
+  <span class="hljs-attribute">--color-line</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.12</span>);
+  <span class="hljs-attribute">--color-accent</span>: <span class="hljs-number">#b6504f</span>;
+  <span class="hljs-attribute">--color-gold</span>: <span class="hljs-number">#c7a56a</span>;
+  <span class="hljs-attribute">--color-focus</span>: <span class="hljs-number">#f0c98a</span>;
+
+  <span class="hljs-attribute">--radius-sm</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">--radius-md</span>: <span class="hljs-number">18px</span>;
+  <span class="hljs-attribute">--radius-lg</span>: <span class="hljs-number">28px</span>;
+
+  <span class="hljs-attribute">--shadow-soft</span>: <span class="hljs-number">0</span> <span class="hljs-number">18px</span> <span class="hljs-number">60px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.28</span>);
+  <span class="hljs-attribute">--content-max</span>: <span class="hljs-number">1180px</span>;
+}
+</div></code></pre>
+<p>コースごとの色は補助的に使用し、可読性を損なわない。</p>
+<h2 id="103-%E3%82%BF%E3%82%A4%E3%83%9D%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3">10.3 タイポグラフィ</h2>
+<ul>
+<li>日本語本文：明朝体とゴシック体を適切に使い分ける。</li>
+<li>長文本文はゴシック系を優先する。</li>
+<li>見出しは明朝体またはセリフ系で舞台的な格調を出す。</li>
+<li>外部フォントが読み込めない場合にも崩れないフォントスタックを設定する。</li>
+<li>本文最小サイズは16px。</li>
+<li>行間は1.7前後。</li>
+</ul>
+<h2 id="104-%E3%82%AB%E3%83%BC%E3%83%89">10.4 カード</h2>
+<p>コースカード：</p>
+<ul>
+<li>横長または縦長</li>
+<li>背景画像に暗いオーバーレイ</li>
+<li>コース記号を大きく表示</li>
+<li>ホバー時はわずかに浮く</li>
+<li>動きは短く控えめ</li>
+<li>スマホでは1列</li>
+<li>タブレットでは2列</li>
+<li>PCでは3列</li>
+</ul>
+<h2 id="105-%E5%8B%95%E7%94%BB">10.5 動画</h2>
+<ul>
+<li>16:9</li>
+<li>最大幅960px程度</li>
+<li>角丸</li>
+<li>背景は黒</li>
+<li>動画下に前後ナビゲーション</li>
+<li>YouTubeの再生速度変更機能をそのまま利用</li>
+<li><code>youtube-nocookie.com</code>を優先</li>
+</ul>
+<hr>
+<h1 id="11-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3">11. アクセシビリティ</h1>
+<p>必須項目：</p>
+<ul>
+<li>キーボード操作</li>
+<li>明確なフォーカスリング</li>
+<li>十分なコントラスト</li>
+<li>画像の<code>alt</code></li>
+<li>iframeの<code>title</code></li>
+<li>見出しレベルの順序</li>
+<li>ボタンとリンクの役割を混同しない</li>
+<li>アニメーション抑制設定への対応</li>
+<li>動画字幕の用意を推奨</li>
+<li>音声のみで伝わらない情報は概要にも記載</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion:</span> reduce) {
+  *,
+  *<span class="hljs-selector-pseudo">::before</span>,
+  *<span class="hljs-selector-pseudo">::after</span> {
+    <span class="hljs-attribute">scroll-behavior</span>: auto <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">0.01ms</span> <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">transition-duration</span>: <span class="hljs-number">0.01ms</span> <span class="hljs-meta">!important</span>;
+  }
+}
+</div></code></pre>
+<hr>
+<h1 id="12-%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%A6%E7%90%86">12. エラー処理</h1>
+<h2 id="121-%E4%B8%8D%E6%AD%A3%E3%81%AA%E8%AC%9B%E7%BE%A9id">12.1 不正な講義ID</h2>
+<p>例：</p>
+<pre class="hljs"><code><div>episode.html?id=Z-99
+</div></code></pre>
+<p>表示：</p>
+<ul>
+<li>「講義が見つかりません」</li>
+<li>トップへ戻る</li>
+<li>コース一覧へ戻る</li>
+<li>URL確認案内</li>
+</ul>
+<h2 id="122-json%E8%AA%AD%E8%BE%BC%E5%A4%B1%E6%95%97">12.2 JSON読込失敗</h2>
+<ul>
+<li>ページ全体を真っ白にしない</li>
+<li>再読み込みボタン</li>
+<li>トップへ戻るリンク</li>
+<li>コンソールへ具体的エラーを出す</li>
+</ul>
+<h2 id="123-%E7%94%BB%E5%83%8F%E8%AA%AD%E8%BE%BC%E5%A4%B1%E6%95%97">12.3 画像読込失敗</h2>
+<ul>
+<li>代替画像</li>
+<li>レイアウト崩れを防ぐ</li>
+<li>不要な壊れた画像アイコンを出さない</li>
+</ul>
+<hr>
+<h1 id="13-url%E8%A8%AD%E8%A8%88">13. URL設計</h1>
+<p>初期版：</p>
+<pre class="hljs"><code><div>/
+welcome.html
+course.html?id=A
+episode.html?id=A-1
+bibliography.html
+about.html
+</div></code></pre>
+<p>将来的にAstro等へ移行する場合：</p>
+<pre class="hljs"><code><div>/courses/a/
+/episodes/a-1/
+/bibliography/
+</div></code></pre>
+<p>内部リンク生成は一か所に集約し、将来のURL変更に備える。</p>
+<hr>
+<h1 id="14-%E5%85%AC%E9%96%8B%E7%8A%B6%E6%85%8B%E3%81%AE%E6%89%B1%E3%81%84">14. 公開状態の扱い</h1>
+<h2 id="%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8">トップページ</h2>
+<ul>
+<li><code>published</code>：通常カード</li>
+<li><code>coming-soon</code>：近日公開</li>
+<li><code>draft</code>：表示しない</li>
+<li><code>hidden</code>：表示しない</li>
+<li><code>archived</code>：原則非表示</li>
+</ul>
+<h2 id="%E8%AC%9B%E7%BE%A9%E3%83%9A%E3%83%BC%E3%82%B8">講義ページ</h2>
+<p><code>coming-soon</code>でもページ自体は表示可能とし、</p>
+<ul>
+<li>タイトル</li>
+<li>概要</li>
+<li>参考文献</li>
+<li>関連回</li>
+<li>公開予定表示</li>
+</ul>
+<p>を出せるようにする。</p>
+<hr>
+<h1 id="15-%E5%B0%86%E6%9D%A5%E5%A4%89%E6%9B%B4%E3%81%AB%E8%80%90%E3%81%88%E3%82%8B%E6%9D%A1%E4%BB%B6">15. 将来変更に耐える条件</h1>
+<p>以下を満たすこと。</p>
+<ul>
+<li>A〜Fの名称変更がJSONだけで完了する。</li>
+<li>コースGを追加してもHTML修正不要。</li>
+<li>1コースの回数を増減してもHTML修正不要。</li>
+<li>A-1をA-3へ並べ替えても<code>order</code>変更だけで対応。</li>
+<li>タイトル変更が関連リンクへ自動反映される。</li>
+<li>回を非公開にしても前後リンクが破綻しない。</li>
+<li>動画未完成でもページが成立する。</li>
+<li>参考文献の表記を一括修正できる。</li>
+<li>S-0を新版へ更新して再表示可能。</li>
+<li>将来Astroへ移行してもJSONを再利用できる。</li>
+</ul>
+<hr>
+<h1 id="16-%E5%88%9D%E6%9C%9F%E5%AE%9F%E8%A3%85%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D">16. 初期実装の優先順位</h1>
+<h2 id="phase-1%E9%AA%A8%E7%B5%84%E3%81%BF">Phase 1：骨組み</h2>
+<ol>
+<li>ディレクトリ整理</li>
+<li>JSONローダー</li>
+<li>初回S-0転送</li>
+<li>S-0ページ</li>
+<li>トップのコースカード</li>
+<li>コース一覧ページ</li>
+<li>講義ページ</li>
+<li>前後リンク</li>
+<li>関連リンク</li>
+<li>スマホ対応</li>
+</ol>
+<h2 id="phase-2%E5%85%AC%E9%96%8B%E5%93%81%E8%B3%AA">Phase 2：公開品質</h2>
+<ol>
+<li>YouTube埋め込み</li>
+<li>参考文献</li>
+<li>画像ギャラリー</li>
+<li>OGP</li>
+<li>favicon</li>
+<li>404相当画面</li>
+<li>アクセシビリティ改善</li>
+<li>読込速度改善</li>
+</ol>
+<h2 id="phase-3%E5%88%86%E6%9E%90%E3%81%A8%E7%99%BA%E5%B1%95">Phase 3：分析と発展</h2>
+<ol>
+<li>Cloudflare Web Analytics</li>
+<li>UTM導線</li>
+<li>YouTube視聴分析</li>
+<li>タグ一覧</li>
+<li>サイト内検索</li>
+<li>最近追加された回</li>
+<li>おすすめ視聴ルート</li>
+</ol>
+<hr>
+<h1 id="17-%E5%88%9D%E5%9B%9Ecodex%E5%AE%9F%E8%A3%85%E6%8C%87%E7%A4%BA">17. 初回Codex実装指示</h1>
+<p>以下をCodexへ渡す。</p>
+<pre class="hljs"><code><div>このリポジトリのCODEX.mdを最優先で読んでください。
+
+まずPhase 1の骨組みだけを実装してください。
+HTML、CSS、Vanilla JavaScript、JSONのみを使用してください。
+外部ライブラリは追加しないでください。
+
+特に以下を実装してください。
+
+1. public/data/courses.jsonとepisodes.jsonから表示を生成する
+2. 初回訪問時だけwelcome.htmlへ転送する
+3. welcome.htmlから元のページまたはトップへ進める
+4. index.htmlにコース一覧を生成する
+5. course.html?id=Aで該当コースの回一覧を生成する
+6. episode.html?id=A-1で講義ページを生成する
+7. 同一コース内の前回・次回をorderから自動計算する
+8. related IDから関連講義カードを生成する
+9. 動画未公開でも壊れない
+10. スマートフォン対応する
+
+実装前に変更予定ファイルを列挙してください。
+実装後に、ローカル確認手順と変更点を短く報告してください。
+</div></code></pre>
+<hr>
+<h1 id="18-%E5%AE%8C%E4%BA%86%E6%9D%A1%E4%BB%B6">18. 完了条件</h1>
+<p>初期版は次を満たせば完成とする。</p>
+<ul>
+<li>初回アクセスでS-0へ移動する。</li>
+<li>二回目以降はトップまたは直接指定ページを開ける。</li>
+<li>S-0はメニューから再視聴できる。</li>
+<li>JSON変更でコース一覧が変わる。</li>
+<li>JSON変更で講義一覧が変わる。</li>
+<li>JSON変更でタイトル・関連回・前後順が変わる。</li>
+<li>動画未登録回でも表示できる。</li>
+<li>PCとスマホでレイアウトが破綻しない。</li>
+<li>Cloudflare Pagesで公開できる。</li>
+<li><code>public</code>外の制作資料は公開されない。</li>
+</ul>
+
+</body>
+
+</html>

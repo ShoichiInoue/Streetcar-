@@ -1,0 +1,26 @@
+[
+  {
+    "id": "S",
+    "title": "ようこそ",
+    "subtitle": "はじめての方へ",
+    "description": "このサイトの使い方と『欲望という名の電車』の概要を学びます",
+    "order": 0,
+    "episodes": []
+  },
+  {
+    "id": "A",
+    "title": "コース A",
+    "subtitle": "基礎",
+    "description": "作品理解の基礎を学ぶコース",
+    "order": 1,
+    "episodes": []
+  },
+  {
+    "id": "B",
+    "title": "コース B",
+    "subtitle": "背景",
+    "description": "歴史的・文化的背景を学ぶ",
+    "order": 2,
+    "episodes": []
+  }
+]

@@ -1,0 +1,147 @@
+# Git コマンド集
+# 以下のコマンドをコピペしてターミナルに貼り付けて実行してください
+
+## 🚀 基本的な作業フロー
+
+# 1. 現在の状態を確認
+git status
+
+# 2. すべての変更をステージング
+git add .
+
+# 3. 変更をコミット（メッセージは適宜変更）
+git commit -m "コンテンツを更新"
+
+# 4. リモートにプッシュ
+git push origin main
+
+## 🔄 よく使うコマンド
+
+# リモートから最新を取得
+git pull origin main
+
+# ブランチを作成
+git branch feature/new-feature
+git checkout feature/new-feature
+
+# または one-liner で
+git checkout -b feature/new-feature
+
+# ブランチを切り替え
+git checkout main
+
+# ブランチの一覧を表示
+git branch -a
+
+# コミット履歴を表示
+git log --oneline
+
+# 最新のコミットを表示
+git show
+
+## 🔧 修正コマンド
+
+# 直前のコミットメッセージを修正（まだプッシュしていない場合）
+git commit --amend -m "修正後のメッセージ"
+
+# ステージをキャンセル
+git reset
+
+# 特定のファイルのステージをキャンセル
+git reset public/data/courses.json
+
+# 変更をリセット（最後のコミット状態に戻す）
+git checkout -- .
+
+# または
+git restore .
+
+## 📊 確認コマンド
+
+# 変更内容を確認
+git diff
+
+# ステージされた変更を確認
+git diff --staged
+
+# リモートブランチの状態を確認
+git fetch origin
+git status
+
+# 特定のファイルの履歴を表示
+git log -- public/data/courses.json
+
+## 🔀 マージ・リベース
+
+# main にマージ
+git checkout main
+git merge feature/new-feature
+
+# リベース（履歴をきれいにしたい場合）
+git rebase origin/main
+
+## 🗑️ 削除・クリーンアップ
+
+# ローカルブランチを削除
+git branch -d feature/old-feature
+
+# リモートブランチを削除
+git push origin --delete feature/old-feature
+
+# 削除されたリモートブランチの参照をローカルから削除
+git fetch --prune
+
+# .gitignore に従わないファイルを削除したい場合（確認のみ）
+git clean -n
+
+# 実際に削除
+git clean -f
+
+## 💾 緊急時
+
+# 作業中の変更をステッシュ（一時保存）
+git stash
+
+# ステッシュを復元
+git stash pop
+
+# ステッシュの一覧を表示
+git stash list
+
+# 最後のコミット前に戻す（変更は残す）
+git reset --soft HEAD~1
+
+# 最後のコミット前に戻す（変更は削除）
+git reset --hard HEAD~1
+
+## 📝 設定コマンド
+
+# ユーザー名を設定
+git config user.name "Your Name"
+
+# メールアドレスを設定
+git config user.email "your.email@example.com"
+
+# グローバル設定（すべてのリポジトリ）
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# 設定を確認
+git config --list
+
+## 🎯 本プロジェクトの推奨ワークフロー
+
+# 1. raw-content の CSV ファイルを編集
+
+# 2. JSON を生成
+python3 build-content.py
+
+# 3. ブラウザで確認
+# http://localhost:8000/?skipIntro=1
+
+# 4. 変更をコミット
+git add .
+git commit -m "コンテンツを更新: [説明]"
+
+# 5. プッシュ
+git push origin main
