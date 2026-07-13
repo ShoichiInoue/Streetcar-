@@ -1,84 +1,86 @@
-/* Design Tokens - 色、間隔、タイポグラフィ定義 */
+/* Design Tokens - dark theatrical lecture experience */
 
 :root {
-  /* Colors - 黒基調、差し色で表現 */
-  --color-primary: #55DBCB;
-  --color-primary-dark: #2d8a98;
-  --color-primary-light: #7ae0d1;
-  --color-secondary: #39A2AE;
-  --color-accent: #D64933;
-  --color-accent-dark: #b03820;
-  
-  --color-text: #F5F1ED;
-  --color-text-light: #b0aca8;
-  --color-text-lighter: #777;
-  --color-text-inverse: #0a0a0a;
-  
-  --color-bg: #0a0a0a;
-  --color-bg-light: #1a1a1a;
-  --color-bg-lighter: #252525;
-  --color-border: #333;
-  --color-border-light: #2a2a2a;
-  
-  --color-success: #4F5D2F;
-  --color-warning: #D64933;
-  --color-error: #D64933;
-  --color-info: #39A2AE;
+  /* Background */
+  --color-bg: #0c0b0a;
+  --color-bg-deep: #080706;
+  --color-surface: #151311;
+  --color-surface-soft: #1d1916;
+  --color-surface-raised: #241f1b;
+
+  /* Text */
+  --color-text: #f4efe7;
+  --color-text-soft: #d8d0c7;
+  --color-text-muted: #aaa097;
+  --color-text-dim: #7f766e;
+
+  /* Accent */
+  --color-gold: #c6a15b;
+  --color-gold-soft: #8f7444;
+  --color-gold-pale: #dfc794;
+
+  /* Course accents */
+  --course-a: #7c2b31;
+  --course-b: #5d4663;
+  --course-c: #445a70;
+  --course-d: #8b6437;
+  --course-e: #3f5b4c;
+  --course-f: #766252;
+
+  /* Lines */
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-line-strong: rgba(255, 255, 255, 0.20);
+
+  /* Focus */
+  --color-focus: #f0c98a;
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Shadow */
+  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.28);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.24);
+
+  /* Layout */
+  --content-max: 1180px;
+  --reading-max: 760px;
+  --video-max: 1080px;
 
   /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-base: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 4rem;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 96px;
 
-  /* Typography - ゴシック統一 */
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-md: 1.125rem;
-  --font-size-lg: 1.5rem;
-  --font-size-xl: 2rem;
-  --font-size-2xl: 2.5rem;
-  --font-size-3xl: 3rem;
+  /* Section spacing */
+  --space-section-sm: 48px;
+  --space-section-md: 72px;
+  --space-section-lg: 96px;
 
-  /* Font Families */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-  --font-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  /* Typography */
+  --font-display: clamp(2.6rem, 6vw, 5.4rem);
+  --font-page-title: clamp(2rem, 4vw, 3.6rem);
+  --font-section-title: clamp(1.5rem, 2.4vw, 2.2rem);
+  --font-card-title: 1.15rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
 
-  /* Line Heights */
-  --line-height-tight: 1.2;
-  --line-height-base: 1.6;
-  --line-height-relaxed: 1.8;
-  --line-height-loose: 2;
+  --font-sans: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+  --font-serif: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
 
-  /* Shadows - 黒基調に適した影 */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
-  --shadow-base: 0 4px 8px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.7);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.8);
-
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-base: 0.5rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
-  --radius-full: 9999px;
-
-  /* Transitions */
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Breakpoints */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
+  /* Motion */
+  --duration-fast: 160ms;
+  --duration-normal: 240ms;
+  --ease-standard: cubic-bezier(.2, .7, .2, 1);
 }
 
 

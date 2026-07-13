@@ -1,4 +1,4 @@
-/* Reset CSS - 全要素のデフォルトスタイルをリセット */
+/* Reset CSS - base reset and typography foundation */
 
 * {
   margin: 0;
@@ -9,19 +9,31 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  background: var(--color-bg-deep);
 }
 
 body {
+  min-height: 100vh;
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.75;
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
+}
+
+::selection {
+  background: rgba(198, 161, 91, 0.35);
+  color: var(--color-text);
 }
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   font-weight: 600;
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
+  color: var(--color-text);
+}
+
+p {
+  color: var(--color-text-soft);
 }
 
 a {
@@ -40,10 +52,10 @@ ul, ol {
   list-style: none;
 }
 
-img {
+img, svg {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 input, textarea, select {

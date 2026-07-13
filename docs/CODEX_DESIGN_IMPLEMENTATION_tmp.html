@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CODEX_DESIGN_IMPLEMENTATION.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/inoueshouichi/Streetcar/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/inoueshouichi/Streetcar/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="codexdesignimplementationmd">CODEX_DESIGN_IMPLEMENTATION.md</h1>
+<h2 id="%E6%AC%B2%E6%9C%9B%E3%81%A8%E3%81%84%E3%81%86%E5%90%8D%E3%81%AE%E9%9B%BB%E8%BB%8A%E5%90%88%E5%A5%8F%E8%A3%9C%E5%8A%A9%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%B5%E3%82%A4%E3%83%88">『欲望という名の電車』合奏補助コンテンツサイト</h2>
+<h3 id="ui%E3%83%BB%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E5%86%8D%E8%A8%AD%E8%A8%88-%E5%AE%9F%E8%A3%85%E6%8C%87%E7%A4%BA%E6%9B%B8">UI・ビジュアル再設計 実装指示書</h3>
+<hr>
+<h1 id="0-%E3%81%93%E3%81%AE%E6%8C%87%E7%A4%BA%E6%9B%B8%E3%81%AE%E7%9B%AE%E7%9A%84">0. この指示書の目的</h1>
+<p>この指示書は、既存の静的サイトを、作品世界にふさわしい統一感のある映像講義サイトへ再設計するための実装仕様である。</p>
+<p>この作業では、既存のJSONデータ構造、ページ遷移、講義情報、コース情報を壊さずに、主として以下を改善する。</p>
+<ul>
+<li>ビジュアルデザイン</li>
+<li>情報の優先順位</li>
+<li>余白</li>
+<li>タイポグラフィ</li>
+<li>色</li>
+<li>写真の扱い</li>
+<li>カード</li>
+<li>動画ページ</li>
+<li>スマートフォン表示</li>
+<li>アクセシビリティ</li>
+<li>初回導線</li>
+<li>ページ間の統一感</li>
+</ul>
+<p>このサイトは、主として演奏参加者が作品理解を深めるために使う。<br>
+同時に、演奏会へ来場した観客も自然に楽しめるものとする。</p>
+<p>「教材サイト」や「資料置き場」ではなく、</p>
+<p><strong>作品世界へ入っていくためのオンライン講義空間</strong></p>
+<p>として設計すること。</p>
+<hr>
+<h1 id="1-%E4%BD%9C%E6%A5%AD%E9%96%8B%E5%A7%8B%E6%99%82%E3%81%AE%E5%BF%85%E9%A0%88%E6%89%8B%E9%A0%86">1. 作業開始時の必須手順</h1>
+<p>作業を始める前に、必ず次の順で確認すること。</p>
+<ol>
+<li><code>CODEX.md</code></li>
+<li><code>docs/architecture.md</code></li>
+<li><code>docs/design-spec.md</code></li>
+<li><code>public/data/site.json</code></li>
+<li><code>public/data/courses.json</code></li>
+<li><code>public/data/episodes.json</code></li>
+<li>現在のHTMLとCSS</li>
+<li>必要なJavaScript</li>
+</ol>
+<p>そのうえで、最初に次を短く報告すること。</p>
+<ul>
+<li>変更予定ファイル</li>
+<li>変更理由</li>
+<li>既存機能に影響する可能性</li>
+<li>今回触らない範囲</li>
+</ul>
+<p>無関係なファイルを大量に読み込まないこと。</p>
+<hr>
+<h1 id="2-%E7%B5%B6%E5%AF%BE%E3%81%AB%E5%AE%88%E3%82%8B%E3%81%93%E3%81%A8">2. 絶対に守ること</h1>
+<h2 id="21-%E6%8A%80%E8%A1%93">2.1 技術</h2>
+<p>使用可能：</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>Vanilla JavaScript</li>
+<li>JSON</li>
+</ul>
+<p>使用禁止：</p>
+<ul>
+<li>React</li>
+<li>Vue</li>
+<li>Svelte</li>
+<li>Astro</li>
+<li>jQuery</li>
+<li>Tailwind</li>
+<li>Bootstrap</li>
+<li>外部UIコンポーネント</li>
+<li>不要なnpm依存</li>
+<li>ビルド必須の構成への変更</li>
+</ul>
+<p>初期版は静的サイトとして維持する。</p>
+<h2 id="22-%E3%83%87%E3%83%BC%E3%82%BF">2.2 データ</h2>
+<ul>
+<li>コース名をHTMLへ直書きしない。</li>
+<li>各回タイトルをHTMLへ直書きしない。</li>
+<li>A〜Fの6コースに固定しない。</li>
+<li>回数を固定しない。</li>
+<li>JSONから自動表示する。</li>
+<li>データ構造は壊さない。</li>
+<li>既存の<code>id</code>を勝手に変更しない。</li>
+<li>公開状態の意味を変更しない。</li>
+</ul>
+<h2 id="23-%E5%85%AC%E9%96%8B%E7%AF%84%E5%9B%B2">2.3 公開範囲</h2>
+<p><code>public</code>以下のみが公開対象。</p>
+<p>以下は公開しない。</p>
+<ul>
+<li><code>CODEX.md</code></li>
+<li><code>docs</code></li>
+<li><code>source</code></li>
+<li><code>raw-content</code></li>
+<li>制作メモ</li>
+<li>未許諾画像</li>
+<li>個人情報</li>
+<li>APIキー</li>
+<li>内部用PDF</li>
+</ul>
+<h2 id="24-git">2.4 Git</h2>
+<ul>
+<li>勝手にcommitしない。</li>
+<li>勝手にpushしない。</li>
+<li>履歴を書き換えない。</li>
+<li>force pushしない。</li>
+<li>作業終了時に、ユーザーが実行すべきGitコマンドだけ示す。</li>
+</ul>
+<hr>
+<h1 id="3-%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">3. デザインコンセプト</h1>
+<h2 id="31-%E4%B8%AD%E5%BF%83%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88">3.1 中心コンセプト</h2>
+<p><strong>劇場の暗がりと、紙提灯のやわらかな光。</strong></p>
+<p>画面全体は暗い。<br>
+しかし、冷たすぎず、重すぎず、閉鎖的すぎない。</p>
+<p>黒そのものではなく、以下を中心にする。</p>
+<ul>
+<li>深い焦げ茶</li>
+<li>墨色</li>
+<li>夜の紺</li>
+<li>くすんだ金</li>
+<li>温かいオフホワイト</li>
+</ul>
+<p>サイトを開いたときに感じるべき印象：</p>
+<ul>
+<li>静か</li>
+<li>知的</li>
+<li>温かい</li>
+<li>夜</li>
+<li>劇場</li>
+<li>本</li>
+<li>余白</li>
+<li>写真集</li>
+<li>公開講義</li>
+<li>少し謎めいている</li>
+<li>入りづらくはない</li>
+<li>続きを見たくなる</li>
+</ul>
+<h2 id="32-%E7%9B%AE%E6%8C%87%E3%81%95%E3%81%AA%E3%81%84%E3%82%82%E3%81%AE">3.2 目指さないもの</h2>
+<ul>
+<li>映画館予約サイト</li>
+<li>YouTubeの模倣</li>
+<li>高級ブランドの模倣</li>
+<li>1940年代風装飾の過剰使用</li>
+<li>レトロテーマパーク</li>
+<li>ホラー</li>
+<li>ゴシック</li>
+<li>派手なポスター</li>
+<li>情報を詰め込んだ大学LMS</li>
+<li>金色だらけの豪華風デザイン</li>
+</ul>
+<hr>
+<h1 id="4-%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E5%93%B2%E5%AD%A6">4. デザイン哲学</h1>
+<h2 id="41-%E4%B8%BB%E5%BD%B9%E3%81%AF%E5%8B%95%E7%94%BB">4.1 主役は動画</h2>
+<p>画面内の情報優先順位は以下。</p>
+<ol>
+<li>動画</li>
+<li>講義タイトル</li>
+<li>前後ナビゲーション</li>
+<li>概要</li>
+<li>関連講義</li>
+<li>参考文献</li>
+<li>写真・資料</li>
+<li>補助情報</li>
+</ol>
+<p>写真は主役ではない。<br>
+背景写真が動画や文字より強く見えないようにする。</p>
+<h2 id="42-%E4%BD%99%E7%99%BD%E3%82%92%E6%83%85%E5%A0%B1%E3%81%A8%E3%81%97%E3%81%A6%E4%BD%BF%E3%81%86">4.2 余白を情報として使う</h2>
+<p>情報を詰め込まない。</p>
+<p>推奨セクション間隔：</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">--space-section-sm</span>: 48<span class="hljs-selector-tag">px</span>;
+<span class="hljs-selector-tag">--space-section-md</span>: 72<span class="hljs-selector-tag">px</span>;
+<span class="hljs-selector-tag">--space-section-lg</span>: 96<span class="hljs-selector-tag">px</span>;
+</div></code></pre>
+<p>講義ページでは、</p>
+<pre class="hljs"><code><div>動画
+↓ 40〜48px
+前後ナビゲーション
+↓ 56〜72px
+概要
+↓ 72〜96px
+関連講義
+↓ 72〜96px
+参考文献
+</div></code></pre>
+<p>を基本とする。</p>
+<h2 id="43-%E9%87%91%E8%89%B2%E3%81%AF%E9%87%8D%E8%A6%81%E6%80%A7%E3%82%92%E7%A4%BA%E3%81%99">4.3 金色は重要性を示す</h2>
+<p>金色は「豪華さ」ではなく「導線」。</p>
+<p>使用対象：</p>
+<ul>
+<li>主要CTA</li>
+<li>現在地</li>
+<li>コース記号</li>
+<li>小さな区切り線</li>
+<li>ホバー</li>
+<li>フォーカス</li>
+<li>重要ラベル</li>
+</ul>
+<p>使用禁止：</p>
+<ul>
+<li>長文本文</li>
+<li>背景全面</li>
+<li>大きな面積</li>
+<li>すべての枠線</li>
+<li>すべての見出し</li>
+</ul>
+<hr>
+<h1 id="5-%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3">5. デザイントークン</h1>
+<p><code>public/css/tokens.css</code>に集約すること。</p>
+<pre class="hljs"><code><div><span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-comment">/* Background */</span>
+  <span class="hljs-attribute">--color-bg</span>: <span class="hljs-number">#0c0b0a</span>;
+  <span class="hljs-attribute">--color-bg-deep</span>: <span class="hljs-number">#080706</span>;
+  <span class="hljs-attribute">--color-surface</span>: <span class="hljs-number">#151311</span>;
+  <span class="hljs-attribute">--color-surface-soft</span>: <span class="hljs-number">#1d1916</span>;
+  <span class="hljs-attribute">--color-surface-raised</span>: <span class="hljs-number">#241f1b</span>;
+
+  <span class="hljs-comment">/* Text */</span>
+  <span class="hljs-attribute">--color-text</span>: <span class="hljs-number">#f4efe7</span>;
+  <span class="hljs-attribute">--color-text-soft</span>: <span class="hljs-number">#d8d0c7</span>;
+  <span class="hljs-attribute">--color-text-muted</span>: <span class="hljs-number">#aaa097</span>;
+  <span class="hljs-attribute">--color-text-dim</span>: <span class="hljs-number">#7f766e</span>;
+
+  <span class="hljs-comment">/* Accent */</span>
+  <span class="hljs-attribute">--color-gold</span>: <span class="hljs-number">#c6a15b</span>;
+  <span class="hljs-attribute">--color-gold-soft</span>: <span class="hljs-number">#8f7444</span>;
+  <span class="hljs-attribute">--color-gold-pale</span>: <span class="hljs-number">#dfc794</span>;
+
+  <span class="hljs-comment">/* Course accents */</span>
+  <span class="hljs-attribute">--course-a</span>: <span class="hljs-number">#7c2b31</span>;
+  <span class="hljs-attribute">--course-b</span>: <span class="hljs-number">#5d4663</span>;
+  <span class="hljs-attribute">--course-c</span>: <span class="hljs-number">#445a70</span>;
+  <span class="hljs-attribute">--course-d</span>: <span class="hljs-number">#8b6437</span>;
+  <span class="hljs-attribute">--course-e</span>: <span class="hljs-number">#3f5b4c</span>;
+  <span class="hljs-attribute">--course-f</span>: <span class="hljs-number">#766252</span>;
+
+  <span class="hljs-comment">/* Lines */</span>
+  <span class="hljs-attribute">--color-line</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.12</span>);
+  <span class="hljs-attribute">--color-line-strong</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.20</span>);
+
+  <span class="hljs-comment">/* Focus */</span>
+  <span class="hljs-attribute">--color-focus</span>: <span class="hljs-number">#f0c98a</span>;
+
+  <span class="hljs-comment">/* Radius */</span>
+  <span class="hljs-attribute">--radius-xs</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">--radius-sm</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">--radius-md</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">--radius-lg</span>: <span class="hljs-number">24px</span>;
+
+  <span class="hljs-comment">/* Shadow */</span>
+  <span class="hljs-attribute">--shadow-soft</span>: <span class="hljs-number">0</span> <span class="hljs-number">18px</span> <span class="hljs-number">60px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.28</span>);
+  <span class="hljs-attribute">--shadow-card</span>: <span class="hljs-number">0</span> <span class="hljs-number">12px</span> <span class="hljs-number">36px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.24</span>);
+
+  <span class="hljs-comment">/* Layout */</span>
+  <span class="hljs-attribute">--content-max</span>: <span class="hljs-number">1180px</span>;
+  <span class="hljs-attribute">--reading-max</span>: <span class="hljs-number">760px</span>;
+  <span class="hljs-attribute">--video-max</span>: <span class="hljs-number">1080px</span>;
+
+  <span class="hljs-comment">/* Spacing */</span>
+  <span class="hljs-attribute">--space-1</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">--space-2</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">--space-3</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">--space-4</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">--space-5</span>: <span class="hljs-number">24px</span>;
+  <span class="hljs-attribute">--space-6</span>: <span class="hljs-number">32px</span>;
+  <span class="hljs-attribute">--space-7</span>: <span class="hljs-number">48px</span>;
+  <span class="hljs-attribute">--space-8</span>: <span class="hljs-number">64px</span>;
+  <span class="hljs-attribute">--space-9</span>: <span class="hljs-number">80px</span>;
+  <span class="hljs-attribute">--space-10</span>: <span class="hljs-number">96px</span>;
+
+  <span class="hljs-comment">/* Motion */</span>
+  <span class="hljs-attribute">--duration-fast</span>: <span class="hljs-number">160ms</span>;
+  <span class="hljs-attribute">--duration-normal</span>: <span class="hljs-number">240ms</span>;
+  <span class="hljs-attribute">--ease-standard</span>: <span class="hljs-built_in">cubic-bezier</span>(.<span class="hljs-number">2</span>, .<span class="hljs-number">7</span>, .<span class="hljs-number">2</span>, <span class="hljs-number">1</span>);
+}
+</div></code></pre>
+<p>既存トークンと重複する場合は整理する。<br>
+同じ意味の色を複数定義しない。</p>
+<hr>
+<h1 id="6-%E3%82%BF%E3%82%A4%E3%83%9D%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3">6. タイポグラフィ</h1>
+<h2 id="61-%E8%A6%8B%E5%87%BA%E3%81%97">6.1 見出し</h2>
+<p>日本語見出し：</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">font-family</span>:
+  "<span class="hljs-selector-tag">Yu</span> <span class="hljs-selector-tag">Mincho</span>",
+  "<span class="hljs-selector-tag">Hiragino</span> <span class="hljs-selector-tag">Mincho</span> <span class="hljs-selector-tag">ProN</span>",
+  "<span class="hljs-selector-tag">Noto</span> <span class="hljs-selector-tag">Serif</span> <span class="hljs-selector-tag">JP</span>",
+  <span class="hljs-selector-tag">serif</span>;
+</div></code></pre>
+<p>英字見出し：</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">font-family</span>:
+  "<span class="hljs-selector-tag">Cormorant</span> <span class="hljs-selector-tag">Garamond</span>",
+  "<span class="hljs-selector-tag">Times</span> <span class="hljs-selector-tag">New</span> <span class="hljs-selector-tag">Roman</span>",
+  <span class="hljs-selector-tag">serif</span>;
+</div></code></pre>
+<p>ただし、外部Webフォントを新規導入しない。<br>
+端末内フォントで成立させる。</p>
+<h2 id="62-%E6%9C%AC%E6%96%87">6.2 本文</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">font-family</span>:
+  "<span class="hljs-selector-tag">Hiragino</span> <span class="hljs-selector-tag">Sans</span>",
+  "<span class="hljs-selector-tag">Yu</span> <span class="hljs-selector-tag">Gothic</span>",
+  "<span class="hljs-selector-tag">Noto</span> <span class="hljs-selector-tag">Sans</span> <span class="hljs-selector-tag">JP</span>",
+  <span class="hljs-selector-tag">system-ui</span>,
+  <span class="hljs-selector-tag">sans-serif</span>;
+</div></code></pre>
+<h2 id="63-%E3%82%B5%E3%82%A4%E3%82%BA">6.3 サイズ</h2>
+<p>PC：</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">--font-display</span>: <span class="hljs-selector-tag">clamp</span>(2<span class="hljs-selector-class">.6rem</span>, 6<span class="hljs-selector-tag">vw</span>, 5<span class="hljs-selector-class">.4rem</span>);
+<span class="hljs-selector-tag">--font-page-title</span>: <span class="hljs-selector-tag">clamp</span>(2<span class="hljs-selector-tag">rem</span>, 4<span class="hljs-selector-tag">vw</span>, 3<span class="hljs-selector-class">.6rem</span>);
+<span class="hljs-selector-tag">--font-section-title</span>: <span class="hljs-selector-tag">clamp</span>(1<span class="hljs-selector-class">.5rem</span>, 2<span class="hljs-selector-class">.4vw</span>, 2<span class="hljs-selector-class">.2rem</span>);
+<span class="hljs-selector-tag">--font-card-title</span>: 1<span class="hljs-selector-class">.15rem</span>;
+<span class="hljs-selector-tag">--font-body</span>: 1<span class="hljs-selector-tag">rem</span>;
+<span class="hljs-selector-tag">--font-small</span>: 0<span class="hljs-selector-class">.875rem</span>;
+</div></code></pre>
+<p>本文：</p>
+<ul>
+<li>16〜18px</li>
+<li>行間1.75</li>
+<li>1行35〜45文字程度</li>
+<li>最大幅760px</li>
+</ul>
+<h2 id="64-%E8%A6%8B%E5%87%BA%E3%81%97%E3%83%AB%E3%83%BC%E3%83%AB">6.4 見出しルール</h2>
+<ul>
+<li><code>h1</code>は1ページ1つ</li>
+<li>見出し階層を飛ばさない</li>
+<li>大文字英字を長文に使わない</li>
+<li>字間は見出しだけ少し広げる</li>
+<li>日本語本文のletter-spacingを広げすぎない</li>
+</ul>
+<hr>
+<h1 id="7-%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88">7. レイアウト</h1>
+<h2 id="71-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">7.1 コンテナ</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.container</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-built_in">min</span>(calc(<span class="hljs-number">100%</span> - <span class="hljs-number">40px</span>), <span class="hljs-built_in">var</span>(--content-max));
+  <span class="hljs-attribute">margin-inline</span>: auto;
+}
+</div></code></pre>
+<p>スマートフォン：</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">width</span>: <span class="hljs-selector-tag">min</span>(<span class="hljs-selector-tag">calc</span>(100% <span class="hljs-selector-tag">-</span> 32<span class="hljs-selector-tag">px</span>), <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--content-max</span>));
+</div></code></pre>
+<h2 id="72-%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89">7.2 グリッド</h2>
+<p>コースカード：</p>
+<ul>
+<li>PC：3列</li>
+<li>Tablet：2列</li>
+<li>Mobile：1列</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">grid-template-columns</span>: <span class="hljs-selector-tag">repeat</span>(3, <span class="hljs-selector-tag">minmax</span>(0, 1<span class="hljs-selector-tag">fr</span>));
+<span class="hljs-selector-tag">gap</span>: 24<span class="hljs-selector-tag">px</span>;
+</div></code></pre>
+<h2 id="73-%E3%82%BB%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">7.3 セクション</h2>
+<p>各セクションの先頭に、</p>
+<ul>
+<li>小見出し</li>
+<li>大見出し</li>
+<li>補足文</li>
+</ul>
+<p>を統一して配置する。</p>
+<p>同じ階層のセクションで余白や見出し位置を変えない。</p>
+<hr>
+<h1 id="8-%E3%83%98%E3%83%83%E3%83%80%E3%83%BC">8. ヘッダー</h1>
+<h2 id="81-pc">8.1 PC</h2>
+<p>高さは72〜80px。</p>
+<p>左：</p>
+<ul>
+<li>サイト短縮名</li>
+<li>小さく演奏会名</li>
+</ul>
+<p>右：</p>
+<ul>
+<li>コース</li>
+<li>参考文献</li>
+<li>このサイトについて</li>
+<li>はじめての方へ</li>
+</ul>
+<p>ヘッダーは黒背景。<br>
+下に細い境界線。</p>
+<p>固定ヘッダーは可能だが、画面を圧迫しないこと。</p>
+<h2 id="82-%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%B3">8.2 スマートフォン</h2>
+<ul>
+<li>高さ60〜64px</li>
+<li>左に短縮タイトル</li>
+<li>右にメニューボタン</li>
+<li>メニューは全画面ではなく、上から静かに開く</li>
+<li>閉じるボタンを明確にする</li>
+<li>ESCで閉じる</li>
+<li>背景スクロールを止める</li>
+<li>キーボード操作可能にする</li>
+</ul>
+<hr>
+<h1 id="9-s-0--welcomehtml">9. S-0 / welcome.html</h1>
+<h2 id="91-%E7%9B%AE%E7%9A%84">9.1 目的</h2>
+<p>初回案内。<br>
+サイトの使い方を説明する。</p>
+<h2 id="92-%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88">9.2 レイアウト</h2>
+<p>第一画面に以下を収める。</p>
+<ul>
+<li>小さな演奏会名</li>
+<li>大見出し</li>
+<li>短い説明</li>
+<li>動画またはキービジュアル</li>
+<li>主要ボタン</li>
+</ul>
+<p>スクロール後に、</p>
+<ul>
+<li>どんなコースがあるか</li>
+<li>好きな回から見られること</li>
+<li>本番前後に使えること</li>
+<li>ゲストの可能性</li>
+<li>コース一覧へ進むボタン</li>
+</ul>
+<h2 id="93-%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB">9.3 ビジュアル</h2>
+<p>背景：</p>
+<ul>
+<li>夜の路面電車</li>
+<li>石畳</li>
+<li>街灯</li>
+<li>ニューオーリンズの街</li>
+<li>暗い劇場</li>
+</ul>
+<p>写真に次を重ねる。</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">linear-gradient</span>(
+  180<span class="hljs-selector-tag">deg</span>,
+  <span class="hljs-selector-tag">rgba</span>(8, 7, 6, 0<span class="hljs-selector-class">.42</span>),
+  <span class="hljs-selector-tag">rgba</span>(8, 7, 6, 0<span class="hljs-selector-class">.84</span>)
+)
+</div></code></pre>
+<p>中央または左寄りに、紙提灯の光を思わせる薄い暖色グラデーション。</p>
+<h2 id="94-cta">9.4 CTA</h2>
+<p>主要文言：</p>
+<pre class="hljs"><code><div>コースを選ぶ
+</div></code></pre>
+<p>補助：</p>
+<pre class="hljs"><code><div>説明を飛ばして一覧へ
+</div></code></pre>
+<p>主要CTAは金背景。<br>
+補助CTAは透明背景＋細枠。</p>
+<hr>
+<h1 id="10-%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8--indexhtml">10. トップページ / index.html</h1>
+<h2 id="101-%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC">10.1 ヒーロー</h2>
+<p>大見出し：</p>
+<pre class="hljs"><code><div>『欲望という名の電車』を、
+音楽の外側から読む。
+</div></code></pre>
+<p>補足：</p>
+<pre class="hljs"><code><div>原作、人物、心理、演出、ニューオーリンズ、
+現代社会、作品史から、ひとつの作品を横断的に読み解く。
+</div></code></pre>
+<p>背景画像は文字を邪魔しない。<br>
+必ず暗いオーバーレイ。</p>
+<h2 id="102-%E3%82%B3%E3%83%BC%E3%82%B9%E4%B8%80%E8%A6%A7">10.2 コース一覧</h2>
+<p>セクション見出し：</p>
+<pre class="hljs"><code><div>COURSES
+コースから選ぶ
+</div></code></pre>
+<p>カードは必ずJSONから生成。</p>
+<h2 id="103-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E3%81%AE%E5%85%A5%E5%8F%A3">10.3 おすすめの入口</h2>
+<p>タグや小カードで表示。</p>
+<p>例：</p>
+<ul>
+<li>まず1本だけ見る</li>
+<li>物語から入る</li>
+<li>音楽から入る</li>
+<li>ブランチを知る</li>
+<li>ニューオーリンズを知る</li>
+</ul>
+<p>見た目はコースカードより小さくする。</p>
+<h2 id="104-%E6%96%B0%E7%9D%80">10.4 新着</h2>
+<p>新着講義は3〜4件。<br>
+「公開日」のみでなく、「最近追加された講義」として見せる。</p>
+<hr>
+<h1 id="11-%E3%82%B3%E3%83%BC%E3%82%B9%E3%82%AB%E3%83%BC%E3%83%89">11. コースカード</h1>
+<h2 id="111-%E6%A7%8B%E9%80%A0">11.1 構造</h2>
+<pre class="hljs"><code><div>画像
+コース記号
+タイトル
+副題
+短い説明
+公開済み回数
+リンク
+</div></code></pre>
+<h2 id="112-%E6%AF%94%E7%8E%87">11.2 比率</h2>
+<p>カード画像：</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">aspect-ratio</span>: 4 / 3;
+</div></code></pre>
+<p>カード全体は高さを揃える。</p>
+<h2 id="113-%E3%83%9B%E3%83%90%E3%83%BC">11.3 ホバー</h2>
+<p>許可：</p>
+<ul>
+<li>4px上がる</li>
+<li>画像が1.02倍</li>
+<li>枠線が少し明るくなる</li>
+</ul>
+<p>禁止：</p>
+<ul>
+<li>大きく傾く</li>
+<li>強い発光</li>
+<li>3D</li>
+<li>派手な色変化</li>
+</ul>
+<hr>
+<h1 id="12-%E3%82%B3%E3%83%BC%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B8--coursehtml">12. コースページ / course.html</h1>
+<h2 id="121-%E3%82%B3%E3%83%BC%E3%82%B9%E3%83%98%E3%83%83%E3%83%80%E3%83%BC">12.1 コースヘッダー</h2>
+<p>左：</p>
+<ul>
+<li>コース記号</li>
+<li>タイトル</li>
+<li>副題</li>
+<li>概要</li>
+</ul>
+<p>右：</p>
+<ul>
+<li>キービジュアル</li>
+</ul>
+<p>スマートフォンでは縦積み。</p>
+<h2 id="122-%E5%9B%9E%E4%B8%80%E8%A6%A7">12.2 回一覧</h2>
+<p>PC：</p>
+<pre class="hljs"><code><div>[サムネイル] [回番号・タイトル・概要・時間・状態]
+</div></code></pre>
+<p>Mobile：</p>
+<pre class="hljs"><code><div>[サムネイル]
+[回番号]
+[タイトル]
+[概要]
+[状態・時間]
+</div></code></pre>
+<h2 id="123-%E5%85%AC%E9%96%8B%E7%8A%B6%E6%85%8B">12.3 公開状態</h2>
+<p>ラベルは文字で明示。</p>
+<ul>
+<li>公開中</li>
+<li>近日公開</li>
+<li>制作中</li>
+</ul>
+<p>色だけで伝えない。</p>
+<hr>
+<h1 id="13-%E8%AC%9B%E7%BE%A9%E3%83%9A%E3%83%BC%E3%82%B8--episodehtml">13. 講義ページ / episode.html</h1>
+<h2 id="131-%E4%B8%8A%E9%83%A8">13.1 上部</h2>
+<p>順序：</p>
+<ol>
+<li>パンくず</li>
+<li>コース名・回番号</li>
+<li>タイトル</li>
+<li>副題</li>
+<li>動画</li>
+</ol>
+<h2 id="132-%E5%8B%95%E7%94%BB">13.2 動画</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">aspect-ratio</span>: 16 / 9;
+<span class="hljs-selector-tag">max-width</span>: <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--video-max</span>);
+<span class="hljs-selector-tag">margin-inline</span>: <span class="hljs-selector-tag">auto</span>;
+<span class="hljs-selector-tag">border-radius</span>: <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--radius-md</span>);
+<span class="hljs-selector-tag">overflow</span>: <span class="hljs-selector-tag">hidden</span>;
+<span class="hljs-selector-tag">box-shadow</span>: <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--shadow-soft</span>);
+<span class="hljs-selector-tag">background</span>: <span class="hljs-selector-id">#000</span>;
+</div></code></pre>
+<p>YouTube未公開時は、</p>
+<ul>
+<li>準備中カード</li>
+<li>サムネイル</li>
+<li>公開予定</li>
+<li>概要</li>
+</ul>
+<p>を表示。</p>
+<p>空iframeは出さない。</p>
+<h2 id="133-%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">13.3 ナビゲーション</h2>
+<p>動画直下：</p>
+<pre class="hljs"><code><div>← 前回    コース一覧    次回 →
+</div></code></pre>
+<p>スマートフォン：</p>
+<pre class="hljs"><code><div>← 前回      次回 →
+コース一覧
+</div></code></pre>
+<p>または縦積み。</p>
+<h2 id="134-%E6%A6%82%E8%A6%81">13.4 概要</h2>
+<p>本文は中央寄せではなく左揃え。<br>
+最大幅760px。<br>
+行間1.75。</p>
+<h2 id="135-%E3%83%81%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC">13.5 チャプター</h2>
+<p>時刻を金色の小ラベル。<br>
+ラベルと本文の整列を統一。</p>
+<h2 id="136-%E9%96%A2%E9%80%A3%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84">13.6 関連コンテンツ</h2>
+<p>横断リンクを3〜4枚のカードで表示。</p>
+<p>カードはコースカードより小型。</p>
+<p>表示：</p>
+<ul>
+<li>ID</li>
+<li>タイトル</li>
+<li>副題</li>
+<li>コース色</li>
+<li>公開状態</li>
+</ul>
+<h2 id="137-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">13.7 参考文献</h2>
+<p>カードではなくリスト形式を基本とする。</p>
+<p>各文献：</p>
+<ul>
+<li>著者</li>
+<li>書名</li>
+<li>出版社・発行年</li>
+<li>使用箇所</li>
+<li>外部リンク</li>
+</ul>
+<p>罫線で静かに区切る。</p>
+<h2 id="138-%E5%86%99%E7%9C%9F%E3%83%BB%E8%B3%87%E6%96%99">13.8 写真・資料</h2>
+<p>2〜3列。<br>
+画像の下に、</p>
+<ul>
+<li>キャプション</li>
+<li>出典</li>
+<li>撮影者</li>
+<li>ライセンス</li>
+</ul>
+<p>を表示。</p>
+<hr>
+<h1 id="14-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E3%83%9A%E3%83%BC%E3%82%B8--bibliographyhtml">14. 参考文献ページ / bibliography.html</h1>
+<h2 id="141-%E7%9B%AE%E7%9A%84">14.1 目的</h2>
+<p>資料一覧ではなく、講義との関係を見せる。</p>
+<h2 id="142-%E8%A1%A8%E7%A4%BA">14.2 表示</h2>
+<p>分類フィルター：</p>
+<ul>
+<li>原作</li>
+<li>作家</li>
+<li>心理学</li>
+<li>精神医学</li>
+<li>演劇</li>
+<li>ニューオーリンズ</li>
+<li>音楽</li>
+<li>映画</li>
+<li>論文</li>
+</ul>
+<p>各文献に、</p>
+<pre class="hljs"><code><div>使用回：A-1 / B-5 / C-2
+</div></code></pre>
+<p>を表示。</p>
+<hr>
+<h1 id="15-%E5%86%99%E7%9C%9F%E3%83%AB%E3%83%BC%E3%83%AB">15. 写真ルール</h1>
+<h2 id="151-%E6%8E%A8%E5%A5%A8">15.1 推奨</h2>
+<ul>
+<li>モノクロ</li>
+<li>低彩度</li>
+<li>セピア</li>
+<li>強めの黒</li>
+<li>余白を残す</li>
+<li>人物の顔を大きく使いすぎない</li>
+</ul>
+<h2 id="152-%E7%A6%81%E6%AD%A2">15.2 禁止</h2>
+<ul>
+<li>AI生成感の強い人物</li>
+<li>権利不明の映画静止画</li>
+<li>低解像度画像</li>
+<li>派手な観光写真</li>
+<li>ストックフォト感の強い写真</li>
+<li>すべてのカードで同じ処理</li>
+</ul>
+<h2 id="153-%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AC%E3%82%A4">15.3 オーバーレイ</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">background</span>:
+  <span class="hljs-selector-tag">linear-gradient</span>(
+    180<span class="hljs-selector-tag">deg</span>,
+    <span class="hljs-selector-tag">rgba</span>(12, 11, 10, 0<span class="hljs-selector-class">.08</span>),
+    <span class="hljs-selector-tag">rgba</span>(12, 11, 10, 0<span class="hljs-selector-class">.76</span>)
+  ),
+  <span class="hljs-selector-tag">url</span>(...);
+</div></code></pre>
+<hr>
+<h1 id="16-%E3%83%9C%E3%82%BF%E3%83%B3">16. ボタン</h1>
+<h2 id="161-primary">16.1 Primary</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--color-gold</span>);
+<span class="hljs-selector-tag">color</span>: <span class="hljs-selector-id">#0b0a09</span>;
+<span class="hljs-selector-tag">min-height</span>: 48<span class="hljs-selector-tag">px</span>;
+<span class="hljs-selector-tag">padding</span>: 0 22<span class="hljs-selector-tag">px</span>;
+<span class="hljs-selector-tag">border-radius</span>: <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--radius-sm</span>);
+</div></code></pre>
+<h2 id="162-secondary">16.2 Secondary</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">transparent</span>;
+<span class="hljs-selector-tag">color</span>: <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--color-text</span>);
+<span class="hljs-selector-tag">border</span>: 1<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-tag">var</span>(<span class="hljs-selector-tag">--color-line-strong</span>);
+</div></code></pre>
+<h2 id="163-%E7%A6%81%E6%AD%A2">16.3 禁止</h2>
+<ul>
+<li>pill型の乱用</li>
+<li>すべて丸角24px以上</li>
+<li>発光</li>
+<li>bouncing</li>
+<li>グラデーション</li>
+</ul>
+<hr>
+<h1 id="17-%E3%82%A2%E3%83%8B%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">17. アニメーション</h1>
+<h2 id="171-%E8%A8%B1%E5%8F%AF">17.1 許可</h2>
+<ul>
+<li>opacity</li>
+<li>translateY 4px</li>
+<li>scale 1.02</li>
+<li>border-color</li>
+<li>background-color</li>
+</ul>
+<h2 id="172-%E6%99%82%E9%96%93">17.2 時間</h2>
+<p>160〜240ms。</p>
+<h2 id="173-reduced-motion">17.3 reduced motion</h2>
+<p>必須。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion:</span> reduce) {
+  *,
+  *<span class="hljs-selector-pseudo">::before</span>,
+  *<span class="hljs-selector-pseudo">::after</span> {
+    <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">0.01ms</span> <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">transition-duration</span>: <span class="hljs-number">0.01ms</span> <span class="hljs-meta">!important</span>;
+    <span class="hljs-attribute">scroll-behavior</span>: auto <span class="hljs-meta">!important</span>;
+  }
+}
+</div></code></pre>
+<hr>
+<h1 id="18-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3">18. アクセシビリティ</h1>
+<p>必須。</p>
+<ul>
+<li>本文16px以上</li>
+<li>十分なコントラスト</li>
+<li>フォーカス表示</li>
+<li>キーボード操作</li>
+<li>iframe title</li>
+<li>alt</li>
+<li>aria-label</li>
+<li>見出し階層</li>
+<li>ボタンとリンクの適切な使い分け</li>
+<li>メニューのフォーカストラップ</li>
+<li>色だけに依存しない</li>
+<li>動画字幕を想定</li>
+<li>クリック領域44px以上</li>
+</ul>
+<hr>
+<h1 id="19-%E3%83%AC%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B7%E3%83%96">19. レスポンシブ</h1>
+<h2 id="191-%E3%83%96%E3%83%AC%E3%83%BC%E3%82%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88">19.1 ブレークポイント</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width:</span> <span class="hljs-number">1100px</span>) { ... }
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width:</span> <span class="hljs-number">780px</span>) { ... }
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width:</span> <span class="hljs-number">520px</span>) { ... }
+</div></code></pre>
+<h2 id="192-mobile-first">19.2 Mobile first</h2>
+<p>必ずスマートフォンで成立させてからPCを広げる。</p>
+<h2 id="193-%E3%83%A2%E3%83%90%E3%82%A4%E3%83%AB%E3%81%AE%E6%B3%A8%E6%84%8F">19.3 モバイルの注意</h2>
+<ul>
+<li>横スクロールを出さない</li>
+<li>本文16px未満禁止</li>
+<li>タップ領域44px以上</li>
+<li>ヘッダーを高くしすぎない</li>
+<li>動画を画面幅いっぱい</li>
+<li>余白を削りすぎない</li>
+<li>長いタイトルが3〜4行になっても崩れない</li>
+</ul>
+<hr>
+<h1 id="20-%E5%AE%9F%E8%A3%85%E5%AF%BE%E8%B1%A1%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">20. 実装対象ファイル</h1>
+<p>優先順位：</p>
+<ol>
+<li><code>public/css/tokens.css</code></li>
+<li><code>public/css/layout.css</code></li>
+<li><code>public/css/components.css</code></li>
+<li><code>public/css/pages.css</code></li>
+<li><code>public/welcome.html</code></li>
+<li><code>public/index.html</code></li>
+<li><code>public/course.html</code></li>
+<li><code>public/episode.html</code></li>
+<li><code>public/bibliography.html</code></li>
+<li><code>public/about.html</code></li>
+</ol>
+<p>JSは必要最小限の修正のみ。</p>
+<hr>
+<h1 id="21-%E5%AE%9F%E8%A3%85%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA">21. 実装フェーズ</h1>
+<h2 id="phase-1">Phase 1</h2>
+<ul>
+<li>トークン整理</li>
+<li>全体背景</li>
+<li>コンテナ</li>
+<li>タイポグラフィ</li>
+<li>ヘッダー</li>
+<li>ボタン</li>
+<li>基本カード</li>
+</ul>
+<h2 id="phase-2">Phase 2</h2>
+<ul>
+<li>welcome</li>
+<li>index</li>
+<li>course</li>
+<li>episode</li>
+</ul>
+<h2 id="phase-3">Phase 3</h2>
+<ul>
+<li>bibliography</li>
+<li>about</li>
+<li>モバイルメニュー</li>
+<li>アニメーション</li>
+<li>アクセシビリティ</li>
+</ul>
+<h2 id="phase-4">Phase 4</h2>
+<ul>
+<li>画像最適化</li>
+<li>OGP</li>
+<li>favicon</li>
+<li>最終QA</li>
+</ul>
+<hr>
+<h1 id="22-%E5%AE%8C%E4%BA%86%E6%9D%A1%E4%BB%B6">22. 完了条件</h1>
+<p>以下をすべて満たすこと。</p>
+<ul>
+<li>JSON変更が画面へ反映される</li>
+<li>既存URLが動く</li>
+<li>初回S-0が動く</li>
+<li>2回目以降はS-0を飛ばす</li>
+<li>S-0を手動再視聴できる</li>
+<li>動画未公開でも壊れない</li>
+<li>コース数変更に耐える</li>
+<li>回数変更に耐える</li>
+<li>前後リンクが壊れない</li>
+<li>関連講義が表示される</li>
+<li>PC・Tablet・Mobileで破綻しない</li>
+<li>キーボードで操作できる</li>
+<li>Cloudflare Pagesでそのまま公開できる</li>
+<li><code>public</code>外が公開されない</li>
+</ul>
+<hr>
+<h1 id="23-%E4%BD%9C%E6%A5%AD%E5%BE%8C%E3%81%AE%E5%A0%B1%E5%91%8A%E5%BD%A2%E5%BC%8F">23. 作業後の報告形式</h1>
+<p>作業後は次の形式で報告すること。</p>
+<pre class="hljs"><code><div>変更ファイル
+- ...
+
+主な変更
+- ...
+
+デザイン上の変更
+- ...
+
+機能への影響
+- ...
+
+ローカル確認手順
+1. ...
+2. ...
+
+未実装
+- ...
+
+Gitコマンド
+git status
+git add .
+git commit -m &quot;サイトデザインを再構築&quot;
+git push
+</div></code></pre>
+<hr>
+<h1 id="24-codex%E3%81%B8%E6%B8%A1%E3%81%99%E6%9C%80%E5%88%9D%E3%81%AE%E5%AE%9F%E8%A1%8C%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88">24. Codexへ渡す最初の実行プロンプト</h1>
+<pre class="hljs"><code><div>CODEX.md、docs/architecture.md、docs/design-spec.md、
+docs/CODEX_DESIGN_IMPLEMENTATION.mdを読んでください。
+
+まず、現在のサイト構造とCSSを確認し、
+変更予定ファイル、変更理由、既存機能への影響を列挙してください。
+
+その後、Phase 1だけを実装してください。
+
+Phase 1の対象：
+- tokens.css
+- layout.css
+- components.css
+- pages.cssの共通部分
+- ヘッダー
+- ボタン
+- 基本カード
+- 全体背景
+- タイポグラフィ
+
+制約：
+- HTML、CSS、Vanilla JavaScriptのみ
+- 既存JSONを壊さない
+- 外部ライブラリを追加しない
+- 既存URLを変更しない
+- Git commit、pushはしない
+
+実装後に、
+変更ファイル、変更点、ローカル確認方法、未実装事項を報告してください。
+</div></code></pre>
+
+</body>
+
+</html>

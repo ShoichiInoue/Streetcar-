@@ -16,24 +16,29 @@ export const RenderCourse = {
     const courseEpisodes = episodesData.filter(e => e.courseId === courseId);
 
     main.innerHTML = `
-      <div class="hero" style="margin-bottom: var(--space-2xl);">
+      <section class="hero">
+        <p class="eyebrow">コース</p>
         <h1>${course.title}</h1>
-        <div class="subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: var(--space-md);">
-          ${course.subtitle}
-        </div>
         <p>${course.description}</p>
-      </div>
+        <div class="hero-actions">
+          <span class="badge">${course.subtitle}</span>
+        </div>
+      </section>
 
-      <section>
-        <h2 style="margin-bottom: var(--space-lg); color: var(--color-primary);">講義一覧</h2>
+      <section class="section-group">
+        <div class="section-heading">
+          <p class="eyebrow">講義</p>
+          <h2>講義一覧</h2>
+          <p>各講義を順に追うことで、作品の理解を少しずつ深められます。</p>
+        </div>
         <div class="episodes-list">
           ${courseEpisodes.length > 0 ? courseEpisodes.map(ep => `
-            <a href="/episode.html?id=${ep.id}" class="episode-item" style="text-decoration: none; display: block;">
-              <div class="episode-number">${ep.id}</div>
-              <div class="episode-title">${ep.title}</div>
-              <div class="episode-description">${ep.description}</div>
+            <a href="/episode.html?id=${ep.id}" class="episode-card">
+              <div class="episode-card__meta">${ep.id}</div>
+              <h3>${ep.title}</h3>
+              <p>${ep.description}</p>
             </a>
-          `).join('') : '<p class="text-muted">このコースの講義はまだ公開されていません</p>'}
+          `).join('') : '<div class="empty-state">このコースの講義はまだ公開されていません</div>'}
         </div>
       </section>
     `;

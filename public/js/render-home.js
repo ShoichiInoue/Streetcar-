@@ -11,25 +11,32 @@ export const RenderHome = {
     const regularCourses = coursesData.filter(c => c.id !== 'S');
 
     main.innerHTML = `
-      <div class="hero">
+      <section class="hero">
+        <p class="eyebrow">第47回定期演奏会</p>
         <h1>${siteData.title}</h1>
         <p>${siteData.description}</p>
-        ${welcomeCourse ? `
-          <a href="/episode.html?id=S-0" class="btn btn-primary">はじめての方へ</a>
-        ` : ''}
-      </div>
+        <div class="hero-actions">
+          ${welcomeCourse ? `<a href="/episode.html?id=S-0" class="btn btn-primary">はじめての方へ</a>` : ''}
+          <a href="/about.html" class="btn btn-secondary">このサイトについて</a>
+        </div>
+      </section>
 
-      <section>
-        <h2 style="margin-bottom: var(--space-lg); color: var(--color-primary);">コース一覧</h2>
+      <section class="section-group">
+        <div class="section-heading">
+          <p class="eyebrow">入口</p>
+          <h2>コースから読む</h2>
+          <p>演奏に参加する方も、観客の方も、気になる題材から自然に入れる構成です。</p>
+        </div>
         <div class="course-list">
           ${regularCourses.map(course => `
-            <a href="/course.html?id=${course.id}" class="course-card" style="text-decoration: none;">
-              <h2>${course.title}</h2>
-              <div class="subtitle">${course.subtitle}</div>
+            <a href="/course.html?id=${course.id}" class="course-card course-card--${course.id}">
+              <div class="course-card__top">
+                <span class="course-chip">${course.id}</span>
+                <span class="course-chip course-chip--muted">${course.subtitle}</span>
+              </div>
+              <h3>${course.title}</h3>
               <p>${course.description}</p>
-              <small style="color: var(--color-text-lighter);">
-                ${course.episodes.length} 個の講義
-              </small>
+              <div class="course-card__meta">${course.episodes.length} 個の講義</div>
             </a>
           `).join('')}
         </div>

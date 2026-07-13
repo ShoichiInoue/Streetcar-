@@ -10,7 +10,6 @@ import { RenderEpisode } from './render-episode.js';
 
 export const App = {
   async init() {
-    // データ読み込み
     const [siteData, coursesData, episodesData] = await Promise.all([
       DataLoader.getSite(),
       DataLoader.getCourses(),
@@ -18,15 +17,12 @@ export const App = {
     ]);
 
     if (!siteData || !coursesData || !episodesData) {
-      document.querySelector('main').innerHTML = 
-        '<p class="alert alert-error">データの読み込みに失敗しました</p>';
+      document.querySelector('main').innerHTML = '<p class="alert alert-error">データの読み込みに失敗しました</p>';
       return;
     }
 
-    // ナビゲーション生成
     Navigation.renderNav(coursesData);
 
-    // ページ判定と描画
     const currentPage = this.getCurrentPage();
     const params = new URLSearchParams(window.location.search);
 
@@ -43,7 +39,6 @@ export const App = {
         await RenderEpisode.render(episodeId, coursesData, episodesData);
       }
     } else if (currentPage === 'welcome.html') {
-      // Welcome ページは別途処理
       this.renderWelcome(siteData, episodesData);
     } else if (currentPage === 'about.html') {
       this.renderAbout(siteData);
@@ -62,27 +57,27 @@ export const App = {
     const nextUrl = new URLSearchParams(window.location.search).get('next') || '/';
 
     main.innerHTML = `
-      <div class="welcome-content">
-        <h1 style="text-align: center; margin-bottom: var(--space-lg);">
-          ${siteData.title}
-        </h1>
-        
-        <p style="text-align: center; font-size: var(--font-size-lg); margin-bottom: var(--space-2xl);">
-          このサイトへようこそ！
-        </p>
+      <section class="welcome-content">
+        <div class="hero">
+          <p class="eyebrow">導線</p>
+          <h1>${siteData.title}</h1>
+          <p>このサイトへようこそ。まずは作品の入門として、ガイダンス動画から始めるのがおすすめです。</p>
+        </div>
 
         ${welcomeEpisode ? `
-          <div style="margin-bottom: var(--space-2xl);">
-            <h2 style="margin-bottom: var(--space-md); color: var(--color-primary);">
-              ${welcomeEpisode.title}
-            </h2>
+          <div class="card card--feature">
+            <div class="section-heading">
+              <p class="eyebrow">はじめに</p>
+              <h2>${welcomeEpisode.title}</h2>
+              <p>${welcomeEpisode.description}</p>
+            </div>
             <div class="video-container">
               ${welcomeEpisode.youtubeId ? `
                 <iframe
                   src="https://www.youtube.com/embed/${welcomeEpisode.youtubeId}"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen>
-                </iframe>
+                ></iframe>
               ` : `
                 <div class="video-placeholder">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -93,24 +88,17 @@ export const App = {
                 </div>
               `}
             </div>
-            <p style="margin-top: var(--space-lg); color: var(--color-text-light);">
-              ${welcomeEpisode.description}
-            </p>
           </div>
         ` : ''}
 
-        <div style="text-align: center; margin-top: var(--space-2xl);">
-          <button class="btn btn-primary" id="continue-btn">
-            コースを選ぶ
-          </button>
+        <div class="hero-actions" style="justify-content:center; margin-top: var(--space-5);">
+          <button class="btn btn-primary" id="continue-btn">コースを選ぶ</button>
         </div>
-      </div>
+      </section>
     `;
 
     document.getElementById('continue-btn').addEventListener('click', () => {
-      // intro-seen フラグを設定
       localStorage.setItem('streetcar_intro_seen_v1', 'true');
-      // 次のページへ遷移
       window.location.href = decodeURIComponent(nextUrl);
     });
   },
@@ -120,33 +108,30 @@ export const App = {
     if (!main) return;
 
     main.innerHTML = `
-      <h1 style="margin-bottom: var(--space-lg);">このサイトについて</h1>
-      
-      <div class="card" style="margin-bottom: var(--space-lg);">
-        <h2 style="color: var(--color-primary); margin-bottom: var(--space-md);">
-          ${siteData.title}
-        </h2>
-        <p style="margin-bottom: var(--space-md);">
-          ${siteData.description}
-        </p>
-        <p style="color: var(--color-text-light);">
-          ${siteData.subtitle}
-        </p>
-      </div>
+      <section class="hero">
+        <p class="eyebrow">サイトについて</p>
+        <h1>このサイトについて</h1>
+        <p>${siteData.description}</p>
+      </section>
 
-      <div class="card">
-        <h3 style="color: var(--color-primary); margin-bottom: var(--space-md);">
-          サイト情報
-        </h3>
-        <ul style="color: var(--color-text-light);">
-          <li style="margin-bottom: var(--space-sm);">
-            <strong>主催:</strong> ${siteData.organization}
+      <div class="card card--feature">
+        <div class="section-heading">
+          <p class="eyebrow">情報</p>
+          <h2>${siteData.title}</h2>
+          <p>${siteData.subtitle}</p>
+        </div>
+        <ul class="episodes-list">
+          <li class="episode-card">
+            <div class="episode-card__meta">主催</div>
+            <h3>${siteData.organization}</h3>
           </li>
-          <li style="margin-bottom: var(--space-sm);">
-            <strong>技術:</strong> HTML, CSS, Vanilla JavaScript, JSON
+          <li class="episode-card">
+            <div class="episode-card__meta">技術</div>
+            <h3>HTML, CSS, Vanilla JavaScript, JSON</h3>
           </li>
-          <li>
-            <strong>動画:</strong> YouTube 埋め込み
+          <li class="episode-card">
+            <div class="episode-card__meta">動画</div>
+            <h3>YouTube 埋め込み</h3>
           </li>
         </ul>
       </div>

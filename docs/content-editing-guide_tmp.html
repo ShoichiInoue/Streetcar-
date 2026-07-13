@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>content-editing-guide.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/inoueshouichi/Streetcar/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/inoueshouichi/Streetcar/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="%E6%AC%B2%E6%9C%9B%E3%81%A8%E3%81%84%E3%81%86%E5%90%8D%E3%81%AE%E9%9B%BB%E8%BB%8A%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E8%AC%9B%E7%BE%A9---%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E7%B7%A8%E9%9B%86%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB">『欲望という名の電車』オンライン講義 - コンテンツ編集マニュアル</h1>
+<p>このドキュメントは、サイトコンテンツを管理・編集する者向けの詳細マニュアルです。</p>
+<h2 id="%F0%9F%93%8B-%E7%9B%AE%E6%AC%A1">📋 目次</h2>
+<ol>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A7%8B%E6%88%90">ファイル構成</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E7%B7%A8%E9%9B%86%E3%81%AE%E6%B5%81%E3%82%8C">コンテンツ編集の流れ</a></li>
+<li><a href="#json%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%B7%A8%E9%9B%86">JSONファイル編集</a></li>
+<li><a href="#%E5%8B%95%E7%94%BB%E3%81%AE%E8%BF%BD%E5%8A%A0%E6%96%B9%E6%B3%95">動画の追加方法</a></li>
+<li><a href="#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%B3%AA%E5%95%8F">よくある質問</a></li>
+<li><a href="#%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95">ローカル確認方法</a></li>
+</ol>
+<hr>
+<h2 id="%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A7%8B%E6%88%90">ファイル構成</h2>
+<h3 id="%E5%85%AC%E9%96%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABpublic-%E4%BB%A5%E4%B8%8B">公開ファイル（<code>public/</code> 以下）</h3>
+<p>Cloudflare Pages で公開されるのは <code>public/</code> 以下だけです。</p>
+<pre class="hljs"><code><div>public/
+├── index.html                   # ホームページ（自動生成）
+├── welcome.html                 # ようこそページ
+├── course.html                  # コース表示ページ
+├── episode.html                 # 講義詳細ページ
+├── about.html                   # このサイトについて
+├── bibliography.html            # 参考資料
+│
+├── data/                        # コンテンツ（編集対象）
+│   ├── site.json               # サイト全体設定
+│   ├── courses.json            # コース一覧
+│   ├── episodes.json           # 講義一覧
+│   ├── references.json         # 参考資料
+│   └── people.json             # スタッフ情報
+│
+├── css/                        # スタイルシート（編集不要）
+├── js/                         # JavaScript（編集不要）
+└── images/                     # 画像ファイル
+</div></code></pre>
+<h3 id="%E9%9D%9E%E5%85%AC%E9%96%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABdocssource-%E3%81%AA%E3%81%A9">非公開ファイル（<code>docs/</code>、<code>source/</code> など）</h3>
+<ul>
+<li><code>CODEX.md</code> - 作業ルール</li>
+<li><code>docs/architecture.md</code> - システム設計書</li>
+<li><code>docs/content-editing-guide.md</code> - このファイル</li>
+</ul>
+<hr>
+<h2 id="%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E7%B7%A8%E9%9B%86%E3%81%AE%E6%B5%81%E3%82%8C">コンテンツ編集の流れ</h2>
+<h3 id="1%EF%B8%8F%E2%83%A3-%E3%82%B5%E3%82%A4%E3%83%88%E5%9F%BA%E6%9C%AC%E6%83%85%E5%A0%B1%E3%82%92%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B">1️⃣ <strong>サイト基本情報を編集する</strong></h3>
+<p>ファイル: <code>public/data/site.json</code></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"『欲望という名の電車』オンライン講義"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"第47回定期演奏会 合奏補助コンテンツ"</span>,
+  <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"Streetcar Named Desire Online Lecture"</span>,
+  <span class="hljs-attr">"organization"</span>: <span class="hljs-string">"第47回定期演奏会実行委員会"</span>
+}
+</div></code></pre>
+<p><strong>編集項目:</strong></p>
+<ul>
+<li><code>title</code>: ページのタイトル</li>
+<li><code>description</code>: サイトの説明</li>
+<li><code>subtitle</code>: 英語版タイトル</li>
+<li><code>organization</code>: 主催者名</li>
+</ul>
+<hr>
+<h3 id="2%EF%B8%8F%E2%83%A3-%E3%82%B3%E3%83%BC%E3%82%B9%E6%83%85%E5%A0%B1%E3%82%92%E8%BF%BD%E5%8A%A0%E3%83%BB%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B">2️⃣ <strong>コース情報を追加・編集する</strong></h3>
+<p>ファイル: <code>public/data/courses.json</code></p>
+<pre class="hljs"><code><div>[
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"S"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"ようこそ"</span>,
+    <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"はじめての方へ"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"このサイトの使い方と『欲望という名の電車』の概要を学びます"</span>,
+    <span class="hljs-attr">"order"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"episodes"</span>: []
+  },
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"コース A"</span>,
+    <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"基礎"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"作品理解の基礎を学ぶコース"</span>,
+    <span class="hljs-attr">"order"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"episodes"</span>: []
+  }
+]
+</div></code></pre>
+<p><strong>フィールド説明:</strong></p>
+<ul>
+<li><code>id</code>: コースの一意な識別子（英字+数字）※ URL に使用</li>
+<li><code>title</code>: コース名</li>
+<li><code>subtitle</code>: キャッチコピー</li>
+<li><code>description</code>: 詳細説明</li>
+<li><code>order</code>: 表示順序（0が最初）</li>
+<li><code>episodes</code>: このコースに属する講義 ID の配列</li>
+</ul>
+<p><strong>新しいコースを追加する例:</strong></p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"B"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"コース B"</span>,
+  <span class="hljs-attr">"subtitle"</span>: <span class="hljs-string">"背景と歴史"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"『欲望という名の電車』の文化的背景を学ぶ"</span>,
+  <span class="hljs-attr">"order"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"episodes"</span>: [<span class="hljs-string">"B-1"</span>, <span class="hljs-string">"B-2"</span>, <span class="hljs-string">"B-3"</span>]
+}
+</div></code></pre>
+<p>⚠️ <strong>注意:</strong></p>
+<ul>
+<li><code>id</code> を後から変更すると、講義の <code>courseId</code> も変更する必要があります</li>
+<li><code>order</code> に重複がないようにしてください</li>
+<li>HTMLへコース情報を直書きしてはいけません</li>
+</ul>
+<hr>
+<h3 id="3%EF%B8%8F%E2%83%A3-%E8%AC%9B%E7%BE%A9%E3%82%92%E8%BF%BD%E5%8A%A0%E3%83%BB%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B">3️⃣ <strong>講義を追加・編集する</strong></h3>
+<p>ファイル: <code>public/data/episodes.json</code></p>
+<pre class="hljs"><code><div>[
+  {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"S-0"</span>,
+    <span class="hljs-attr">"courseId"</span>: <span class="hljs-string">"S"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"はじめに"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"オンライン講義のガイダンス"</span>,
+    <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"5:30"</span>,
+    <span class="hljs-attr">"youtubeId"</span>: <span class="hljs-string">"dQw4w9WgXcQ"</span>,
+    <span class="hljs-attr">"transcript"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"order"</span>: <span class="hljs-number">0</span>
+  }
+]
+</div></code></pre>
+<p><strong>フィールド説明:</strong></p>
+<ul>
+<li><code>id</code>: 講義の一意な識別子（<code>courseId-番号</code> 形式推奨）</li>
+<li><code>courseId</code>: 所属するコース ID</li>
+<li><code>title</code>: 講義タイトル</li>
+<li><code>description</code>: 講義説明</li>
+<li><code>duration</code>: 動画の長さ（例: &quot;5:30&quot;）</li>
+<li><code>youtubeId</code>: YouTube のビデオ ID（下記参照）</li>
+<li><code>transcript</code>: テキストスクリプト（HTML形式可）</li>
+<li><code>order</code>: コース内での表示順序</li>
+</ul>
+<hr>
+<h2 id="json%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%B7%A8%E9%9B%86">JSONファイル編集</h2>
+<h3 id="json-%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%83%AB%E3%83%BC%E3%83%AB">JSON の基本ルール</h3>
+<p>JSON は <strong>厳密な形式</strong> です。以下を守ってください:</p>
+<h4 id="%E2%9D%8C-%E6%AD%A3%E3%81%97%E3%81%8F%E3%81%AA%E3%81%84%E4%BE%8B">❌ 正しくない例</h4>
+<pre class="hljs"><code><div><span class="hljs-comment">// コメントは使用禁止</span>
+{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A-1"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"講義 1"</span>,    ← 最後のカンマ（末尾）は不可
+}
+</div></code></pre>
+<h4 id="%E2%9C%85-%E6%AD%A3%E3%81%97%E3%81%84%E4%BE%8B">✅ 正しい例</h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A-1"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"講義 1"</span>
+}
+</div></code></pre>
+<h3 id="json-%E3%81%AE%E8%A8%98%E8%BF%B0%E3%83%AB%E3%83%BC%E3%83%AB">JSON の記述ルール</h3>
+<table>
+<thead>
+<tr>
+<th>ルール</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>文字列は二重引用符 &quot;&quot; で囲む</strong></td>
+<td><code>&quot;id&quot;: &quot;A-1&quot;</code></td>
+</tr>
+<tr>
+<td><strong>数値は引用符なし</strong></td>
+<td><code>&quot;order&quot;: 0</code></td>
+</tr>
+<tr>
+<td><strong>真偽値は小文字</strong></td>
+<td><code>&quot;active&quot;: true</code></td>
+</tr>
+<tr>
+<td><strong><input type="checkbox" id="checkbox0"><label for="checkbox0">で囲む</label></strong></td>
+<td><code>&quot;episodes&quot;: [&quot;A-1&quot;, &quot;A-2&quot;]</code></td>
+</tr>
+<tr>
+<td><strong>オブジェクトは { } で囲む</strong></td>
+<td><code>{ &quot;id&quot;: &quot;A-1&quot; }</code></td>
+</tr>
+<tr>
+<td><strong>最後の項目の後にカンマは不可</strong></td>
+<td><code>&quot;title&quot;: &quot;foo&quot;</code> (カンマなし)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E6%A4%9C%E8%A8%BC%E6%96%B9%E6%B3%95">検証方法</h3>
+<p>JSON の書き方が正しいか確認するツール:</p>
+<ul>
+<li><a href="https://www.jsonlint.com/">jsonlint.com</a></li>
+<li>VS Code 内蔵の JSON バリデーション</li>
+</ul>
+<hr>
+<h2 id="%E5%8B%95%E7%94%BB%E3%81%AE%E8%BF%BD%E5%8A%A0%E6%96%B9%E6%B3%95">動画の追加方法</h2>
+<h3 id="%F0%9F%93%BA-youtube-%E5%8B%95%E7%94%BB%E3%82%92%E5%9F%8B%E3%82%81%E8%BE%BC%E3%82%80%E6%89%8B%E9%A0%86">📺 YouTube 動画を埋め込む手順</h3>
+<h4 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%97-1-youtube-%E5%8B%95%E7%94%BB%E3%81%AE-url-%E3%82%92%E7%A2%BA%E8%AA%8D"><strong>ステップ 1: YouTube 動画の URL を確認</strong></h4>
+<p>YouTube の共有 URL:</p>
+<pre class="hljs"><code><div>https://www.youtube.com/watch?v=dQw4w9WgXcQ
+</div></code></pre>
+<h4 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%97-2-%E3%83%93%E3%83%87%E3%82%AA-id-%E3%82%92%E6%8A%BD%E5%87%BA"><strong>ステップ 2: ビデオ ID を抽出</strong></h4>
+<p>URL の <code>v=</code> 以降の部分:</p>
+<pre class="hljs"><code><div>dQw4w9WgXcQ  ← これがビデオ ID
+</div></code></pre>
+<h4 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%97-3-episodesjson-%E3%81%AB%E8%A8%98%E9%8C%B2"><strong>ステップ 3: episodes.json に記録</strong></h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A-1"</span>,
+  <span class="hljs-attr">"courseId"</span>: <span class="hljs-string">"A"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"背景と文化"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"作品の背景を学びます"</span>,
+  <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"8:45"</span>,
+  <span class="hljs-attr">"youtubeId"</span>: <span class="hljs-string">"dQw4w9WgXcQ"</span>,
+  <span class="hljs-attr">"transcript"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"order"</span>: <span class="hljs-number">0</span>
+}
+</div></code></pre>
+<h4 id="%E3%82%B9%E3%83%86%E3%83%83%E3%83%97-4-%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%A7%E7%A2%BA%E8%AA%8D"><strong>ステップ 4: ブラウザで確認</strong></h4>
+<ol>
+<li>ローカルサーバーを起動</li>
+<li>ブラウザで該当の講義ページへアクセス</li>
+<li>動画が表示されることを確認</li>
+</ol>
+<h3 id="%F0%9F%93%9D-%E5%8B%95%E7%94%BB%E6%9C%AA%E5%85%AC%E9%96%8B%E6%99%82%E3%81%AE%E5%AF%BE%E5%BF%9C">📝 動画未公開時の対応</h3>
+<p><code>youtubeId</code> が空文字列の場合、自動的に「動画未公開」プレースホルダーが表示されます。</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"A-2"</span>,
+  <span class="hljs-attr">"youtubeId"</span>: <span class="hljs-string">""</span>,  ← 空にしておく
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"こちらの講義は近日中に公開予定です"</span>
+}
+</div></code></pre>
+<hr>
+<h2 id="%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E8%B3%AA%E5%95%8F">よくある質問</h2>
+<h3 id="q1-%E3%82%B3%E3%83%BC%E3%82%B9%E7%95%AA%E5%8F%B7%E3%82%84%E8%AC%9B%E7%BE%A9%E6%95%B0%E3%82%92%E5%9B%BA%E5%AE%9A%E3%81%97%E3%81%A6%E3%82%82%E3%81%84%E3%81%84">Q1: コース番号や講義数を固定してもいい？</h3>
+<p>❌ <strong>いけません。</strong> CODEX.md に「固定値として実装しないでください」と明記されています。</p>
+<p>JSON でデータを管理することで、HTML を変更せずにコンテンツを追加・削除・並び替えできます。</p>
+<h3 id="q2-html-%E3%81%AB%E8%AC%9B%E7%BE%A9%E5%86%85%E5%AE%B9%E3%82%92%E7%9B%B4%E6%9B%B8%E3%81%8D%E3%81%97%E3%81%A6%E3%82%82%E3%81%84%E3%81%84">Q2: HTML に講義内容を直書きしてもいい？</h3>
+<p>❌ <strong>いけません。</strong> データを <code>episodes.json</code> から表示する仕組みになっています。</p>
+<h3 id="q3-%E7%94%BB%E5%83%8F%E3%82%92%E3%81%A9%E3%81%93%E3%81%AB%E7%BD%AE%E3%81%8F">Q3: 画像をどこに置く？</h3>
+<p><code>public/images/</code> 以下に置きます:</p>
+<pre class="hljs"><code><div>public/images/
+├── courses/
+├── episodes/
+├── references/
+└── site/
+</div></code></pre>
+<p>JSON で参照する場合:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"course-01"</span>,
+  <span class="hljs-attr">"image"</span>: <span class="hljs-string">"/images/courses/course-a.jpg"</span>
+}
+</div></code></pre>
+<h3 id="q4-%E5%A4%96%E9%83%A8%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AAjquerybootstrap%E7%AD%89%E3%82%92%E4%BD%BF%E3%81%84%E3%81%9F%E3%81%84">Q4: 外部ライブラリ（jQuery、Bootstrap等）を使いたい</h3>
+<p>❌ <strong>事前確認が必須です。</strong> CODEX.md に「外部ライブラリを追加する前に確認を求めてください」と明記されています。</p>
+<p>初期版は <strong>HTML、CSS、Vanilla JavaScript、JSON のみ</strong> に限定されています。</p>
+<h3 id="q5-%E5%88%9D%E5%9B%9E%E8%A8%AA%E5%95%8F%E3%81%AE%E5%B0%8E%E7%B7%9A%E3%82%92%E7%84%A1%E8%A6%96%E3%81%97%E3%81%9F%E3%81%84">Q5: 初回訪問の導線を無視したい</h3>
+<p>ブラウザ URL に <code>?skipIntro=1</code> パラメータをつけます:</p>
+<pre class="hljs"><code><div>http://localhost:8000/?skipIntro=1
+</div></code></pre>
+<p>スクリーンショット撮影やデバッグ時に使用します。</p>
+<h3 id="q6-localstorage-%E3%81%AE%E3%82%AD%E3%83%BC%E3%81%AF%E4%BD%95">Q6: localStorage のキーは何？</h3>
+<pre class="hljs"><code><div>streetcar_intro_seen_v1
+</div></code></pre>
+<h3 id="q7-%E3%82%B3%E3%83%BC%E3%82%B9-id-%E3%82%84%E8%AC%9B%E7%BE%A9-id-%E3%81%AE%E5%91%BD%E5%90%8D%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AF">Q7: コース ID や講義 ID の命名ルールは？</h3>
+<p><strong>推奨:</strong></p>
+<ul>
+<li>コース: <code>A</code>, <code>B</code>, <code>C</code> ... (大文字英字)</li>
+<li>ようこそ: <code>S</code> (S for &quot;start&quot;)</li>
+<li>講義: <code>コースID-連番</code> (例: <code>A-1</code>, <code>A-2</code>, <code>B-1</code>)</li>
+</ul>
+<hr>
+<h2 id="%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95">ローカル確認方法</h2>
+<h3 id="python-3-%E3%82%92%E4%BD%BF%E7%94%A8">Python 3 を使用</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> /Users/inoueshouichi/Streetcar/public
+python3 -m http.server 8000
+</div></code></pre>
+<h3 id="nodejs-%E3%82%92%E4%BD%BF%E7%94%A8">Node.js を使用</h3>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> /Users/inoueshouichi/Streetcar/public
+npx http-server . -p 8000
+</div></code></pre>
+<p>ブラウザで <a href="http://localhost:8000">http://localhost:8000</a> にアクセス。</p>
+<hr>
+<h2 id="%E5%A4%89%E6%9B%B4%E3%82%92%E5%8F%8D%E6%98%A0%E3%81%95%E3%81%9B%E3%82%8B%E3%81%AB%E3%81%AF">変更を反映させるには</h2>
+<ol>
+<li>JSON ファイルを編集・保存</li>
+<li>ブラウザをリロード（Cmd+R または Ctrl+R）</li>
+<li>ブラウザキャッシュが邪魔な場合: キャッシュなしリロード（Cmd+Shift+R または Ctrl+Shift+R）</li>
+</ol>
+<hr>
+<h2 id="%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</h2>
+<h3 id="json-%E3%81%8C%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BE%E3%82%8C%E3%81%AA%E3%81%84">JSON が読み込まれない</h3>
+<ol>
+<li>ブラウザの開発者ツール（F12）を開く</li>
+<li>Console タブでエラーメッセージを確認</li>
+<li>通常は JSON の形式エラー → jsonlint.com で検証</li>
+</ol>
+<h3 id="%E5%8B%95%E7%94%BB%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84">動画が表示されない</h3>
+<ol>
+<li>YouTube ID が正しいか確認</li>
+<li>動画が公開状態か確認</li>
+<li>ブラウザキャッシュをクリア</li>
+</ol>
+<h3 id="%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%8C%E7%9C%9F%E3%81%A3%E7%99%BD%E3%81%AB%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B">ページが真っ白に表示される</h3>
+<ol>
+<li>ブラウザキャッシュをクリア</li>
+<li>ブラウザコンソールでエラーを確認</li>
+<li>JSON ファイルが正しい形式か確認</li>
+</ol>
+<hr>
+<p><strong>最終更新:</strong> 2026-07-10<br>
+<strong>編集者:</strong> GitHub Copilot</p>
+
+</body>
+
+</html>
